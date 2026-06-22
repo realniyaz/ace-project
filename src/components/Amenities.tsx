@@ -8,66 +8,84 @@ interface AmenityItem {
 }
 
 const amenitiesList: AmenityItem[] = [
-  { name: "Swimming Pool", image: "/amenity-pool.png" },
-  { name: "Gym", image: "/amenity-gym.png" },
+  { name: "Infinity Swimming Pool", image: "/amenity-pool.png" },
+  { name: "State-of-the-Art Gym", image: "/amenity-gym.png" },
   { name: "Jogging Track", image: "/amenity-track.png" },
   { name: "Yoga Pavilion", image: "/amenity-yoga.png" },
   { name: "Tennis Court", image: "/amenity-tennis.png" },
-  { name: "24/7 CCTV Security", image: "/amenity-cctv.png" },
+  { name: "24/7 Concierge Desk", image: "/amenity-cctv.png" },
   { name: "Luxury Club House", image: "/amenity-clubhouse.png" },
-  { name: "Mini Theater", image: "/amenity-theatre.png" }
+  { name: "Private Mini Theater", image: "/amenity-theatre.png" }
 ];
+
+// Tripled list array to achieve seamless infinite loop scrolling without gaps
+const tripleMarqueeList = [...amenitiesList, ...amenitiesList, ...amenitiesList];
 
 export default function Amenities() {
   return (
-    <section id="amenities" className="relative py-14 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <section id="amenities" className="relative pb-20 lg:pb-28 pt-0 bg-[#FAF9F5] overflow-hidden select-none">
+      
+      {/* Light subtle geometric background layout vector textures */}
+      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
+
+      <div className="space-y-12 relative z-10 w-full">
         
-        {/* Section Header Text Area */}
-        <div className="text-center space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-brand-gold block">
-            Amenities 
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-neutral-950">
-            Amenities that Define Excellence 
+        {/* SECTION METRIC EDITORIAL HEADER */}
+        <div className="text-center space-y-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-3 py-1 rounded-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] uppercase">Bespoke Inclusions</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-neutral-950">
+            Amenities that Define Excellence
           </h2>
         </div>
 
-        {/* ================= HIGH-END INTERACTIVE GRID SYSTEM ================= */}
-        {/* Mobile: Symmetrical 2-column square layout grid avoiding page elongation */}
-        {/* Desktop: Pristine 4-column balanced architectural matrix layout */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-          {amenitiesList.map((item, idx) => (
-            <div
-              key={item.name}
-              className="group relative w-full aspect-square rounded-xl overflow-hidden bg-neutral-100 shadow-xs hover:shadow-xl transition-all duration-500 ease-out"
-            >
-              {/* Core Image Asset Layer */}
-              <Image
-                src={item.image}
-                alt={`${item.name} Feature Illustration`}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-w-768px) 50vw, 25vw"
-              />
+        {/* ================= INFINITE LOOP CAROUSEL WINDOW PORT ================= */}
+        <div className="w-full relative overflow-hidden mask-linear-horizontal py-4 group/marquee-container">
+          
+          <div className="flex gap-6 w-max whitespace-nowrap shrink-0 animate-marquee-horizontal group-hover/marquee-container:[animation-play-state:paused]">
+            {tripleMarqueeList.map((item, index) => (
+              <div
+                key={`${item.name}-${index}`}
+                className="relative w-[280px] sm:w-[340px] aspect-square rounded-2xl border border-neutral-200/80 bg-neutral-900 shadow-xl overflow-hidden group cursor-pointer transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) hover:scale-[1.03] hover:z-30 hover:shadow-2xl hover:border-[#991b1b]/30"
+              >
+                {/* Core Image Asset Layer */}
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-cover transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) grayscale opacity-40 blur-xs group-hover:grayscale-0 group-hover:opacity-100 group-hover:blur-none"
+                  sizes="340px"
+                />
 
-              {/* High-Contrast Bottom Vignette Gradient Mask Layer */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90 z-10" />
+                {/* Adaptive shadow protection gradient layer mask */}
+                <div className="absolute inset-0 bg-linear-to-t from-neutral-950/90 via-neutral-950/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-60" />
 
-              {/* Top Structural Border Line Accent - Visible on Hover */}
-              <span className="absolute top-0 left-0 right-0 h-[3px] bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center z-20" />
+                {/* ================= HIGH-VISIBILITY TYPOGRAPHY TEXT LAYERS ================= */}
+                <div className="absolute inset-0 p-6 z-20 flex flex-col justify-end text-left whitespace-normal">
+                  <div className="space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1)">
+                    
+                    {/* Tiny inline identity red trace indicator dot marker */}
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-[#991b1b] scale-0 group-hover:scale-100 transition-transform duration-500" />
+                      <h3 className="font-medium text-base sm:text-lg text-white tracking-wide leading-tight drop-shadow-md">
+                        {item.name}
+                      </h3>
+                    </div>
 
-              {/* Typographic Content Title Surface Overlay */}
-              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5 z-20 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300 ease-out flex items-center gap-2.5">
-                {/* Clean inline geometric dot indicator */}
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:inline-block" />
-                
-                <h3 className="font-light text-sm sm:text-base text-white tracking-wide leading-tight drop-shadow-xs">
-                  {item.name}
-                </h3>
+                    <p className="text-[10px] text-neutral-400 font-light opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75 max-w-[240px] leading-relaxed">
+                      Exclusive lifestyle space allocated inside the upcoming premium residential portfolio perimeter.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tiny top asset branding visual frame tag line decoration */}
+                <span className="absolute top-0 inset-x-0 h-[2.5px] bg-[#991b1b] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center z-30" />
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
         </div>
 
       </div>

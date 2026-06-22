@@ -35,95 +35,112 @@ export default function Pricing() {
   };
 
   return (
-    <section id="pricing" className="relative py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-neutral-50 overflow-hidden">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <section id="pricing" className="relative py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-[#FAF9F5] overflow-hidden">
+      
+      {/* Light subtle grid vector canvas layers */}
+      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
+
+      <div className="max-w-5xl mx-auto space-y-12 relative z-10">
         
-        {/* Section Header Text */}
-        <div className="text-center space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-brand-gold block">
-            Price List
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-neutral-950">
-            Unlock the Door to Luxury Living
+        {/* ================= EDITORIAL SECTION HEADERS ================= */}
+        <div className="text-center space-y-3">
+          <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-3 py-1 rounded-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] uppercase">Investment Matrix</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-neutral-950 max-w-xl mx-auto leading-tight">
+            Luxurious Spaces Calibrated to Perfection
           </h2>
         </div>
 
-        {/* ================= CARDS CONTAINER DECK ================= */}
-        {/* Mobile: Smooth, interactive swipeable ribbon container */}
-        {/* Desktop: Premium asymmetrical 3-column structural layout */}
-        <div className="flex overflow-x-auto pb-6 lg:pb-0 scrollbar-none snap-x snap-mandatory lg:grid lg:grid-cols-3 gap-5">
-          {projectData.configurations.map((item) => (
-            <div
-              key={item.name}
-              className="group relative shrink-0 w-[285px] sm:w-[330px] lg:w-full snap-center bg-white border border-neutral-200/60 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-200/80 hover:border-brand-gold/40"
-            >
-              <div className="space-y-5 w-full">
-                {/* Configuration Typographic Heading */}
-                <div className="flex justify-between items-center">
-                  <span className="px-3 py-1 border border-neutral-200 text-[10px] font-bold tracking-widest text-neutral-800 uppercase bg-neutral-50">
+        {/* ================= MASTERED LEDGER SHEET CONTAINER ================= */}
+        <div className="bg-white border border-neutral-200/80 rounded-2xl shadow-xl shadow-neutral-900/5 overflow-hidden transition-all duration-300">
+          
+          {/* DESKTOP MATRIX HEADER TAB (Hidden on Mobile) */}
+          <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-neutral-50 border-b border-neutral-200 text-[10px] font-bold tracking-widest text-neutral-400 uppercase select-none">
+            <div className="col-span-4">Typology Arrangement</div>
+            <div className="col-span-3">Super Area Footprint</div>
+            <div className="col-span-3">Starting Value Allocation</div>
+            <div className="col-span-2 text-right">Portfolio Actions</div>
+          </div>
+
+          {/* LEDGER DATA ROW COMPILER PIPELINE */}
+          <div className="divide-y divide-neutral-100">
+            {projectData.configurations.map((item) => (
+              <div
+                key={item.name}
+                className="group relative px-6 py-6 md:px-8 md:py-7 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-4 items-center bg-white transition-all duration-500 ease-out hover:bg-neutral-50/60"
+              >
+                {/* Asymmetric left edge brand line indicator tracking element */}
+                <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#991b1b] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center" />
+
+                {/* COLUMN 1: CONFIG TYPOLOGY */}
+                <div className="col-span-1 md:col-span-4 flex items-center justify-between md:justify-start gap-4">
+                  <span className="text-sm font-medium text-neutral-900 uppercase tracking-wide">
                     {item.name}
                   </span>
-                  
-                  {/* Luxury Layout Blueprint Icon Overlay */}
-                  <svg className="w-5 h-5 text-neutral-300 group-hover:text-brand-gold transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  {/* Blueprint geometry icon metadata trace */}
+                  <svg className="w-4 h-4 text-neutral-300 group-hover:text-[#991b1b] md:block hidden transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
+                  
+                  {/* Mobile Only: Starting price badge positioning alignment */}
+                  <span className="md:hidden px-2.5 py-1 bg-[#991b1b]/10 border border-[#991b1b]/20 text-[#991b1b] text-[10px] font-bold rounded-sm">
+                    {item.price}
+                  </span>
                 </div>
 
-                {/* Pricing Display Surface */}
-                <div className="space-y-0.5">
-                  <span className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase block">Starting Value</span>
-                  <div className="text-xl sm:text-2xl font-light text-neutral-900 tracking-wide group-hover:text-brand-gold transition-colors duration-300">
+                {/* COLUMN 2: GEOMETRIC AREA VALUES */}
+                <div className="col-span-1 md:col-span-3 flex md:block items-center justify-between border-t border-dashed border-neutral-100 md:border-none pt-2 md:pt-0">
+                  <span className="md:hidden text-[10px] uppercase tracking-wider text-neutral-400 font-light">Super Area</span>
+                  <div className="flex items-center gap-2 text-xs xl:text-sm text-neutral-600 font-light">
+                    <svg className="w-3.5 h-3.5 text-neutral-400 md:inline hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4M4 4v16m0-4l5-5m11 5v4m0 0h-4m4 0l-5-5M20 4v16" />
+                    </svg>
+                    {item.size}
+                  </div>
+                </div>
+
+                {/* COLUMN 3: VALUATION VALUES (Desktop Dedicated Panel) */}
+                <div className="col-span-1 md:col-span-3 hidden md:block">
+                  <div className="text-sm xl:text-base font-medium text-neutral-900 group-hover:text-[#991b1b] transition-colors duration-300">
                     {item.price}
                   </div>
                 </div>
 
-                {/* Symmetrical Dimension Line Dividers */}
-                <div className="pt-4 border-t border-dashed border-neutral-200 flex justify-between items-center text-sm">
-                  <div className="flex items-center gap-1.5 text-neutral-400 font-light text-xs uppercase tracking-wider">
-                    {/* Area Geometry Rule Vector */}
-                    <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4M4 4v16m0-4l5-5m11 5v4m0 0h-4m4 0l-5-5M20 4v16" />
-                    </svg>
-                    Super Area
-                  </div>
-                  <span className="text-neutral-800 font-medium tracking-wide text-xs sm:text-sm">{item.size}</span>
+                {/* COLUMN 4: ACTION TRIGGER SYSTEM BUTTON */}
+                <div className="col-span-1 md:col-span-2 pt-2 md:pt-0">
+                  <button suppressHydrationWarning
+                    onClick={() => openEnquiry(item.name)}
+                    className="w-full relative bg-neutral-950 text-white font-bold text-[11px] uppercase tracking-widest py-3 shadow-md rounded-xl md:rounded-none overflow-hidden group/btn cursor-pointer transition-all duration-300"
+                  >
+                    <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
+                    <span className="relative z-10 flex items-center justify-center gap-1.5">
+                      Enquire
+                      <svg className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                  </button>
                 </div>
-              </div>
 
-              {/* Action Button: Liquid Hover Transition Layer */}
-              <button
-                onClick={() => openEnquiry(item.name)}
-                className="w-full relative mt-8 bg-neutral-900 text-white px-5 py-3.5 font-bold text-xs uppercase tracking-widest transition-all duration-300 overflow-hidden group/btn active:scale-[0.99] shadow-md"
-              >
-                {/* Horizontal dynamic sliding reveal color block layout */}
-                <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-300 origin-left -translate-x-full group-hover/btn:translate-x-0" />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Enquire Now
-                  <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-              </button>
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
 
-      {/* ================= OVERLAY POP-UP INTERACTIVE INQUIRY MODAL ================= */}
+      {/* ================= INQUIRY SCREEN DIALOG POPUP OVERLAY MODAL ================= */}
       {isModalOpen && (
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4 animate-fade-in animate-duration-200">
-          <div 
-            className="absolute inset-0 bg-neutral-950/60 backdrop-blur-md"
-            onClick={() => setIsModalOpen(false)} 
-          />
+          <div className="absolute inset-0 bg-neutral-950/70 backdrop-blur-md" onClick={() => setIsModalOpen(false)} />
           
           <div className="relative bg-white border border-neutral-100 w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl z-10 animate-fade-in-up">
-            <button
+            <button suppressHydrationWarning
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-full transition-colors"
-              aria-label="Close form"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-full cursor-pointer"
+              aria-label="Close form view"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -131,10 +148,8 @@ export default function Pricing() {
             </button>
 
             <div className="text-center mb-6">
-              <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">
-                Request Pricing Details
-              </h3>
-              <p className="text-xs text-brand-gold font-bold uppercase tracking-widest mt-1">
+              <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">Request Pricing Ledger</h3>
+              <p className="text-xs text-[#991b1b] font-bold uppercase tracking-wider mt-1">
                 Config Selected: {selectedConfig}
               </p>
             </div>
@@ -142,57 +157,55 @@ export default function Pricing() {
             <form onSubmit={handlePricingSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-neutral-600 mb-1">Full Name</label>
-                <input
+                <input suppressHydrationWarning
                   type="text"
                   name="name"
                   required
                   placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-neutral-600 mb-1">Mobile Contact</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2">
-                    🇮🇳 +91
-                  </span>
-                  <input
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2">🇮🇳 +91</span>
+                  <input suppressHydrationWarning
                     type="tel"
                     name="mobile"
                     required
                     pattern="[0-9]{10}"
-                    placeholder="10 digit mobile number"
+                    placeholder="10 digit mobile code"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-20 pr-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-20 pr-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-neutral-600 mb-1">Email Address</label>
-                <input
+                <input suppressHydrationWarning
                   type="email"
                   name="email"
                   required
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-4 bg-brand-gold text-neutral-950 font-bold text-sm py-4 rounded-xl shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none active:scale-[0.99]"
+                className="w-full relative mt-4 bg-[#991b1b] text-white font-bold text-sm py-4 rounded-xl shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none active:scale-[0.99] cursor-pointer"
               >
                 <div className={`absolute inset-0 bg-neutral-950 transition-transform duration-500 origin-left ${isSubmitting ? "translate-x-0" : "-translate-x-full"}`} />
-                <span className={`relative z-10 flex items-center justify-center gap-2 ${isSubmitting ? "text-white" : "text-neutral-950"}`}>
-                  {isSubmitting ? "Submitting Inquiry..." : "Submit Inquiry"}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {isSubmitting ? "Transmitting Profile..." : "Access Pricing File"}
                 </span>
               </button>
             </form>

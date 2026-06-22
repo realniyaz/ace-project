@@ -62,3 +62,25 @@
 .animation-delay-100 { animation-delay: 100ms; }
 .animation-delay-200 { animation-delay: 200ms; }
 .animation-delay-300 { animation-delay: 300ms; }
+
+/* ================= INFINITE MARQUEE CORE ANIMATION ENGINE ================= */
+@keyframes marquee-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Moves exactly one third of the tripled array to create a seamless infinite loop */
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+/* Custom utility class to bind the infinite flow animation */
+.animate-marquee-horizontal {
+  animation: marquee-horizontal 35s linear infinite;
+}
+
+/* Master-grade edge fading mask so elements blend cleanly into the background corners */
+.mask-linear-horizontal {
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}

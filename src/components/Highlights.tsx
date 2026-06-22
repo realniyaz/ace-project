@@ -16,51 +16,49 @@ const highlightsList: HighlightItem[] = [
 
 export default function Highlights() {
   return (
-    <section id="highlights" className="relative py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-neutral-950 overflow-hidden min-h-screen lg:min-h-[55vh] flex flex-col justify-between">
+    <section id="highlights" className="relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-neutral-950 overflow-hidden min-h-screen lg:min-h-[60vh] flex flex-col justify-between">
       
       {/* ================= BACKGROUND PRESENTATION LAYER ================= */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/highlights-presentation.jpg')" }}
       >
-        <div className="absolute inset-0 bg-neutral-950/95 lg:bg-neutral-950/80 backdrop-blur-xs z-10" />
+        {/* Deep mask override matching the primary Hero backdrop shadow configurations */}
+        <div className="absolute inset-0 bg-linear-to-b from-black/95 via-neutral-950/90 to-black/95 z-10" />
       </div>
 
-      {/* ================= CORE CONTENT WRAPPER ================= */}
-      {/* Mobile: Standard flex column block for vertical stacking */}
-      {/* Desktop: Asymmetric 12-column grid layout distribution */}
-      <div className="relative z-20 max-w-6xl mx-auto w-full flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+      {/* ================= CORE CONTENT GRID WRAPPER ================= */}
+      <div className="relative z-20 max-w-6xl mx-auto w-full flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16 items-center my-auto">
         
-        {/* LEFT COLUMN STRUCTURE: TEXT & HEADLINE AREA */}
-        <div className="w-full lg:col-span-5 space-y-3 text-center lg:text-left">
-          <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-gold/90 block">
+        {/* LEFT COLUMN STRUCTURE: EDITORIAL TEXT AREA */}
+        <div className="w-full lg:col-span-5 space-y-4 text-center lg:text-left">
+          <div className="space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#991b1b] bg-[#991b1b]/10 border border-[#991b1b]/30 px-2.5 py-1 inline-block lg:block lg:w-max rounded-sm backdrop-blur-md">
               Highlights
             </span>
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-white/95 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
               Discover the Finest Features & Finishes
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed max-w-md mx-auto lg:mx-0">
-            Every aspect is engineered to maximize privacy, natural airflow, and luxury. Experience architectural excellence shaped by world-class interior planning.
+            Every aspect is engineered to maximize privacy, natural airflow, and luxury. Experience architectural excellence shaped by world-class interior planning models.
           </p>
         </div>
 
-        {/* RIGHT COLUMN STRUCTURE: LIST REFLOW STRUCTURAL ENGINE */}
-        {/* Mobile: Full block with centered item components */}
-        {/* Desktop: Right-aligned block layout */}
-        <div className="w-full lg:col-span-7 space-y-1 lg:space-y-0 divide-y divide-white/5">
+        {/* RIGHT COLUMN STRUCTURE: MASTERED LIST ENGINE */}
+        <div className="w-full lg:col-span-7 space-y-0 divide-y divide-white/10">
           {highlightsList.map((item) => (
             <div
               key={item.title}
-              className="group flex flex-col sm:flex-row lg:flex-row items-center sm:justify-start gap-3 sm:gap-4 py-4 transition-colors duration-300 hover:border-brand-gold/20"
+              className="group flex items-center gap-4 py-4 transition-all duration-300 border-white/5"
             >
               {/* Flex Anchor Box for Icon and Text Layout Alignment */}
-              <div className="flex items-center gap-3 w-full justify-center sm:justify-start">
-                {/* SVG Pointer Framework */}
-                <div className="shrink-0 flex items-center justify-center w-5 h-5 rounded-md bg-brand-gold/10 border border-brand-gold/20 text-brand-gold group-hover:bg-brand-gold group-hover:text-neutral-950 transition-all duration-300">
+              <div className="flex items-center gap-3.5 w-full justify-start text-left">
+                
+                {/* SVG Pointer Framework - Branded to ACE Crimson Red */}
+                <div className="shrink-0 flex items-center justify-center w-5 h-5 rounded-sm bg-[#991b1b]/15 border border-[#991b1b]/30 text-white group-hover:bg-[#991b1b] group-hover:border-[#991b1b] transition-all duration-500 ease-out">
                   <svg 
-                    className="w-3 h-3" 
+                    className="w-2.5 h-2.5 transition-transform duration-300 group-hover:scale-110" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor" 
@@ -71,16 +69,19 @@ export default function Highlights() {
                 </div>
 
                 {/* Typography Container Field */}
-                <span className="font-light text-sm sm:text-base text-white/90 tracking-wide group-hover:text-white transition-colors duration-200 text-center sm:text-left">
-                  {item.title}
-                </span>
-                
-                {/* Optional Badge Block Reflow */}
-                {item.badge && (
-                  <span className="bg-brand-gold/15 border border-brand-gold/30 text-brand-gold text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-xs shrink-0 select-none">
-                    {item.badge}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="font-light text-sm sm:text-base text-neutral-200 tracking-wide group-hover:text-white transition-colors duration-300">
+                    {item.title}
                   </span>
-                )}
+                  
+                  {/* Optional Badge Block Reflow */}
+                  {item.badge && (
+                    <span className="bg-[#991b1b]/20 border border-[#991b1b]/40 text-white text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-xs shrink-0 select-none">
+                      {item.badge}
+                    </span>
+                  )}
+                </div>
+
               </div>
             </div>
           ))}
@@ -88,25 +89,27 @@ export default function Highlights() {
 
       </div>
 
-      {/* ================= FOOTER CTA ACTION DECK STRUCTURE ================= */}
-      {/* Mobile: Dynamic flex rows that scale cleanly across small viewports */}
-      <div className="relative z-20 max-w-6xl mx-auto w-full border-t border-white/10 pt-5 mt-6">
-        <div className="bg-neutral-900/30 backdrop-blur-md border border-white/5 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300 hover:border-white/10">
+      {/* ================= BOTTOM CONTENT COMPACT CTA BANNER ================= */}
+      <div className="relative z-20 max-w-6xl mx-auto w-full border-t border-white/10 pt-6 mt-10">
+        <div className="bg-neutral-900/60 backdrop-blur-xl border border-white/10 p-5 flex flex-col md:flex-row items-center justify-between gap-5 transition-all duration-500 hover:border-white/20">
           
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
-            <span className="bg-brand-gold/15 text-brand-gold text-[9px] font-bold uppercase tracking-widest px-2 py-1 border border-brand-gold/30 shrink-0 select-none">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+            <span className="bg-[#991b1b] text-white text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1.5 shrink-0 select-none rounded-none">
               SIGNATURE CLUB
             </span>
-            <h4 className="text-xs font-light text-neutral-400 tracking-wide leading-snug">
-              High Profile Luxury Club House Amenities Included With Every Unit Allocation
+            <h4 className="text-xs font-light text-neutral-400 tracking-wide leading-relaxed max-w-xl">
+              High Profile Luxury Club House Amenities Included With Every Unit Allocation Pipeline Framework.
             </h4>
           </div>
           
           <a 
             href="#amenities" 
-            className="bg-brand-gold text-neutral-950 hover:bg-white hover:text-neutral-950 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all duration-300 shrink-0 w-full md:w-auto text-center active:scale-[0.99]"
+            className="group relative bg-white text-neutral-950 font-bold text-xs uppercase tracking-widest px-6 py-3.5 transition-all duration-500 shrink-0 w-full md:w-auto text-center overflow-hidden active:scale-[0.99]"
           >
-            View Amenities
+            <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+              View Amenities
+            </span>
           </a>
         </div>
       </div>

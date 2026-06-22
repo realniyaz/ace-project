@@ -18,7 +18,6 @@ export default function FooterContact() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Simulate submission network transfer validation overhead
       await new Promise((resolve) => setTimeout(resolve, 1200));
       router.push("/thank-you");
     } catch (error) {
@@ -28,42 +27,47 @@ export default function FooterContact() {
   };
 
   return (
-    <section id="contact" className="relative py-14 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-neutral-100 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="relative pb-20 lg:pb-28 pt-0 px-4 sm:px-6 lg:px-8 bg-[#FAF9F5] overflow-hidden select-none">
+      
+      {/* Light subtle geometric background layout vector textures */}
+      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* Main Section Header Text */}
-        <div className="text-center mb-10 lg:mb-14 space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-brand-gold block">
-            Contact Us
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-neutral-950">
-            We're Here to Help You Find Your Perfect Property
+        {/* ================= EDITORIAL SECTION HEADERS ================= */}
+        <div className="text-center mb-10 lg:mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-3 py-1 rounded-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] uppercase">Get In Touch</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-neutral-950 max-w-2xl mx-auto leading-tight">
+            Connect with our Bespoke Advisory Desk
           </h2>
         </div>
 
         {/* Core Layout Split Architecture */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* LEFT SIDE: ABOUT THE DEVELOPER METRIC PROFILE */}
-          <div className="lg:col-span-7 space-y-4 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <h3 className="text-lg font-medium tracking-tight text-neutral-900">
-              About Developer
+          <div className="lg:col-span-7 bg-white border border-neutral-200/80 p-6 sm:p-10 rounded-2xl shadow-xl shadow-neutral-950/5 flex flex-col justify-center text-center lg:text-left space-y-4">
+            <h3 className="text-xl font-light tracking-tight text-neutral-900">
+              About Developer Portfolio
             </h3>
-            <div className="text-neutral-500 font-light text-xs sm:text-sm leading-relaxed space-y-4 max-w-2xl">
+            <div className="text-neutral-600 font-light text-xs sm:text-sm leading-relaxed space-y-4 max-w-2xl text-justify md:text-center lg:text-left">
               <p>
-                <strong className="font-medium text-neutral-800">ACE Group</strong> is one of the leading real estate developers in the NCR region, recognized for delivering premium residential and commercial developments that combine innovation, quality, and modern design. Established in 2010, the company has earned a strong reputation through its commitment to timely delivery, superior construction standards, and customer-centric approach.
+                <strong className="font-medium text-neutral-800">ACE Group</strong> is one of the leading real estate developers in the NCR region, recognized for delivering premium residential developments that combine structural innovation, strict engineering parameters, and ultra-minimal aesthetics.
               </p>
               <p>
-                With a diverse portfolio of landmark projects, ACE Group focuses on creating thoughtfully planned communities that offer world-class amenities, sustainable living, and exceptional value. Driven by excellence and a vision for the future, the developer continues to redefine urban lifestyles while maintaining the trust and confidence of homebuyers and investors across India.
+                With a diverse footprint of landmark landmarks across Sector 150, Noida, ACE Group builds communities initialized around expansive open-air ventilation layouts, local micro-climate trees, and high-profile private clubhouse systems, preserving absolute investment value across generations.
               </p>
             </div>
           </div>
 
-          {/* RIGHT SIDE: PREMIUM GLASSMORPHIC LEAD FORM GENERATOR */}
-          <div className="lg:col-span-5 w-full">
-            <div className="bg-neutral-900 border border-neutral-800 p-6 sm:p-8 shadow-2xl transition-all duration-300 hover:border-brand-gold/20 w-full">
-              <h3 className="text-base font-medium tracking-wider uppercase text-white mb-6 text-center lg:text-left">
-                Send A Message
+          {/* RIGHT SIDE: PREMIUM HIGH-CONTRAST SECURE LEAD FORM */}
+          <div className="lg:col-span-5 w-full flex">
+            <div className="bg-neutral-900 border border-neutral-800 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col justify-center w-full relative">
+              <h3 className="text-xs font-bold tracking-[0.15em] uppercase text-white mb-6 text-center lg:text-left">
+                Send Direct Message
               </h3>
               
               <form onSubmit={handleContactSubmit} className="space-y-4">
@@ -75,12 +79,12 @@ export default function FooterContact() {
                     placeholder="Your Full Name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-brand-gold focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#991b1b] focus:bg-white/10 transition-all"
                   />
                 </div>
 
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-neutral-400 font-medium border-r border-white/10 pr-2">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-white/10 pr-2.5">
                     🇮🇳 +91
                   </span>
                   <input
@@ -91,7 +95,7 @@ export default function FooterContact() {
                     placeholder="Mobile Contact"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-none pl-20 pr-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-brand-gold focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-16 pr-4 py-3.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#991b1b] focus:bg-white/10 transition-all"
                   />
                 </div>
 
@@ -103,7 +107,7 @@ export default function FooterContact() {
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-brand-gold focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#991b1b] focus:bg-white/10 transition-all"
                   />
                 </div>
 
@@ -112,22 +116,21 @@ export default function FooterContact() {
                     type="checkbox"
                     required
                     defaultChecked
-                    className="mt-0.5 border-neutral-700 bg-neutral-900 text-brand-gold focus:ring-0 focus:ring-offset-0 scale-95 accent-brand-gold"
+                    className="mt-0.5 border-neutral-800 bg-neutral-950 text-white focus:ring-0 focus:ring-offset-0 scale-95 accent-[#991b1b]"
                   />
-                  <span className="text-[10px] leading-snug text-neutral-400 group-hover:text-neutral-300 transition-colors text-left">
-                    I authorize company representatives to Call, SMS, Email or WhatsApp me about its products and offers. This consent overrides any registration for DNC/NDNC.
+                  <span className="text-[10px] leading-relaxed text-neutral-400 group-hover:text-neutral-300 transition-colors text-left font-light">
+                    I authorize verified project representatives to Call, SMS, Email or WhatsApp me regarding this property. This overrides DND/NDNC registries completely.
                   </span>
                 </label>
 
-                {/* Animated Submit button fold layer */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-widest py-3.5 shadow-md transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none group/btn cursor-pointer active:scale-99"
+                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl transition-all duration-500 overflow-hidden disabled:opacity-70 disabled:pointer-events-none group/btn cursor-pointer active:scale-[0.99]"
                 >
-                  <span className="absolute inset-0 bg-neutral-950 transition-transform duration-300 origin-left -translate-x-full group-hover/btn:translate-x-0" />
+                  <span className="absolute inset-0 bg-neutral-950 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {isSubmitting ? "Transmitting Lead..." : "Submit Now"}
+                    {isSubmitting ? "Transmitting Profile..." : "Submit Inquiry"}
                   </span>
                 </button>
               </form>
