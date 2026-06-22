@@ -32,6 +32,7 @@ export default function Navbar() {
       setIsScrolled(currentScrollY > 40);
 
       if (currentScrollY > lastScrollY.current && currentScrollY > 150) {
+        setIsOpen(false); // Close mobile canvas if active on downward scroll
         setIsVisible(false);
       } else {
         setIsVisible(true);
@@ -52,32 +53,32 @@ export default function Navbar() {
     <>
       {/* ================= HEADER STRUCTURE CONTAINER ================= */}
       <header
-        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
           isScrolled
             ? "bg-neutral-950/95 border-b border-white/10 py-3.5 shadow-2xl shadow-black/50"
-            : "bg-black/10 backdrop-blur-xs py-5 border-b border-white/5"
+            : "bg-black/10 backdrop-blur-xs py-4 sm:py-5 border-b border-white/5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           
-          {/* BRAND LOGO FRAME (Hardware accelerated blend transition engine) */}
-          <a href="#hero" className="relative z-110 transition-all duration-500 active:scale-95">
+          {/* BRAND LOGO FRAME */}
+          <a href="#hero" onClick={() => setIsOpen(false)} className="relative z-50 transition-all duration-500 active:scale-95 shrink-0">
             <Image
               src="/acelogo.png"
               alt="ACE Logo"
               width={130}
               height={40}
-              className={`h-8 sm:h-9 w-auto object-contain transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
+              className={`h-7 sm:h-9 w-auto object-contain transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
                 isOpen && !isScrolled ? "brightness-0 grayscale contrast-200" : "brightness-0 invert"
               }`}
               priority
             />
           </a>
 
-          {/* DESKTOP LINK CLUSTERS (Symmetrical Center-Expanding Underline Physics) */}
-          <nav className="hidden lg:flex items-center gap-2">
+          {/* DESKTOP LINK CLUSTERS */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -89,7 +90,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* DESKTOP CALL-TO-ACTION BRAND BUTTON PANEL */}
+          {/* DESKTOP CALL-TO-ACTION BUTTON */}
           <div className="hidden lg:flex items-center">
             <a
               href={`tel:${projectData.contact.phone}`}
@@ -105,10 +106,10 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* MASTERED INTERACTIVE HAMBURGER CROSS INDICATOR BUTTON */}
+          {/* HAMBURGER TOGGLE BUTTON */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-110 p-2 focus:outline-none cursor-pointer"
+            className="lg:hidden relative z-50 p-2 focus:outline-none cursor-pointer rounded-md transition-colors"
             aria-label="Toggle Menu"
           >
             <div className="w-5 h-3.5 flex flex-col justify-between relative">
@@ -134,62 +135,67 @@ export default function Navbar() {
 
       {/* ================= MOBILE FULL-SCREEN CANVAS OVERLAY SYSTEM ================= */}
       <div
-        className={`fixed inset-0 z-90 lg:hidden flex flex-col bg-[#fcfbf9] transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
+        className={`fixed inset-0 z-40 lg:hidden flex flex-col bg-[#fcfbf9] transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
           isOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
         }`}
       >
         {/* Fine background geometric micro grid layout */}
         <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:24px_24px]" />
 
-        {/* Links Navigation Matrix Sequence */}
-        <div className="relative z-10 my-auto flex flex-col justify-center px-6 sm:px-12 space-y-1">
-          <span className={`text-[10px] font-bold tracking-[0.25em] text-[#991b1b] uppercase mb-4 transition-all duration-700 delay-150 ${
-            isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
-          }`}>
-            Navigation Index
-          </span>
-          {navLinks.map((link, idx) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`text-2xl sm:text-3xl font-light tracking-wide text-neutral-800 hover:text-[#991b1b] py-3 border-b border-neutral-200/60 transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) transform ${
-                isOpen ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-md"
-              }`}
-              style={{ 
-                transitionDelay: `${idx * 45 + 100}ms`,
-                ["--delay" as any]: `${idx * 45 + 100}ms`
-              } as React.CSSProperties}
-            >
-              <div className="flex items-center justify-between group">
-                <span className="transition-transform duration-300 group-hover:translate-x-2">{link.label}</span>
-                <svg className="w-5 h-5 text-[#991b1b] opacity-0 transform -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Footer Contact Deck inside Mobile Overlay Screen */}
-        <div className={`relative z-10 p-6 sm:p-12 border-t border-neutral-200/60 bg-neutral-100/80 backdrop-blur-md transition-all duration-[8500ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${
-          isOpen ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-        }`}>
-          <div className="flex flex-col gap-3 max-w-sm mx-auto">
-            <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase text-center">Bespoke Advisory Desk</span>
-            <a
-              href={`tel:${projectData.contact.phone}`}
-              className="group relative flex items-center justify-center gap-3 w-full bg-[#991b1b] text-white font-bold py-4 text-xs uppercase tracking-[0.15em] shadow-xl overflow-hidden transition-all duration-300 active:scale-[0.99]"
-            >
-              <span className="absolute inset-0 bg-neutral-900 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
-              <span className="relative z-10 flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                Direct Line Connection
-              </span>
-            </a>
+        {/* Scrollable Center-Aligned Frame Matrix Pipeline */}
+        <div className="relative z-10 flex-1 flex flex-col justify-between overflow-y-auto pt-24 pb-8 px-6 sm:px-12 scrollbar-none">
+          
+          {/* Main List Navigation Elements */}
+          <div className="w-full max-w-sm mx-auto flex flex-col justify-center my-auto space-y-0.5">
+            <span className={`text-[9px] font-bold tracking-[0.25em] text-[#991b1b] uppercase mb-2 transition-all duration-700 delay-100 ${
+              isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+            }`}>
+              Navigation Index
+            </span>
+            
+            {navLinks.map((link, idx) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`text-xl sm:text-2xl font-light tracking-wide text-neutral-800 hover:text-[#991b1b] py-2.5 sm:py-3 border-b border-neutral-200/50 transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) transform ${
+                  isOpen ? "translate-y-0 opacity-100 blur-none" : "translate-y-6 opacity-0 blur-md"
+                }`}
+                style={{ 
+                  transitionDelay: `${idx * 40 + 100}ms`
+                }}
+              >
+                <div className="flex items-center justify-between group">
+                  <span className="transition-transform duration-300 group-hover:translate-x-2">{link.label}</span>
+                  <svg className="w-4 h-4 text-[#991b1b] opacity-0 transform -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </a>
+            ))}
           </div>
+
+          {/* Interactive Fixed Base Contact Box inside Mobile Overlay */}
+          <div className={`w-full max-w-sm mx-auto pt-6 border-t border-neutral-200/60 transition-all duration-700 delay-[400ms] transform ${
+            isOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}>
+            <div className="flex flex-col gap-2.5">
+              <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase text-center">Bespoke Advisory Desk</span>
+              <a
+                href={`tel:${projectData.contact.phone}`}
+                className="group relative flex items-center justify-center gap-2.5 w-full bg-[#991b1b] text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-[0.15em] shadow-xl overflow-hidden transition-all duration-300 active:scale-[0.99]"
+              >
+                <span className="absolute inset-0 bg-neutral-900 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
+                <span className="relative z-10 flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  Direct Line Connection
+                </span>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </>
