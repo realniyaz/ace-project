@@ -32,7 +32,7 @@ export default function Navbar() {
       setIsScrolled(currentScrollY > 40);
 
       if (currentScrollY > lastScrollY.current && currentScrollY > 150) {
-        setIsOpen(false); // Close mobile canvas if active on downward scroll
+        setIsOpen(false); 
         setIsVisible(false);
       } else {
         setIsVisible(true);
@@ -52,13 +52,14 @@ export default function Navbar() {
   return (
     <>
       {/* ================= HEADER STRUCTURE CONTAINER ================= */}
+      {/* Fixed: Shifted background layers safely to pristine solid whites across all viewports */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
-          isScrolled
-            ? "bg-neutral-950/95 border-b border-white/10 py-3.5 shadow-2xl shadow-black/50"
-            : "bg-black/10 backdrop-blur-xs py-4 sm:py-5 border-b border-white/5"
+          isScrolled || isOpen
+            ? "bg-white border-b border-neutral-200/80 py-3.5 shadow-xl shadow-neutral-900/5"
+            : "bg-white/90 backdrop-blur-md py-4 sm:py-5 border-b border-neutral-100"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -70,20 +71,19 @@ export default function Navbar() {
               alt="ACE Logo"
               width={130}
               height={40}
-              className={`h-7 sm:h-9 w-auto object-contain transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
-                isOpen && !isScrolled ? "brightness-0 grayscale contrast-200" : "brightness-0 invert"
-              }`}
+              className="h-7 sm:h-9 w-auto object-contain brightness-100 contrast-100"
               priority
             />
           </a>
 
           {/* DESKTOP LINK CLUSTERS */}
+          {/* Fixed: Inverted colors to dark charcoal text for supreme readability on light surface canvas layers */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-neutral-300 hover:text-white transition-colors duration-300 relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[1.5px] after:bg-[#991b1b] hover:after:w-4/5 hover:after:left-[10%] after:transition-all after:duration-500 after:cubic-bezier(0.16, 1, 0.3, 1)"
+                className="px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-neutral-600 hover:text-[#991b1b] transition-colors duration-300 relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[1.5px] after:bg-[#991b1b] hover:after:w-4/5 hover:after:left-[10%] after:transition-all after:duration-500 after:cubic-bezier(0.16, 1, 0.3, 1)"
               >
                 {link.label}
               </a>
@@ -94,10 +94,10 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <a
               href={`tel:${projectData.contact.phone}`}
-              className="group relative bg-[#991b1b] text-white font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-none overflow-hidden transition-all duration-500 shadow-xl"
+              className="group relative bg-[#991b1b] text-white font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-none overflow-hidden transition-all duration-500 shadow-lg shadow-[#991b1b]/10"
             >
-              <span className="absolute inset-0 bg-white transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-neutral-950 transition-colors duration-300">
+              <span className="absolute inset-0 bg-neutral-950 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
+              <span className="relative z-10 flex items-center gap-2 transition-colors duration-300">
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -107,6 +107,7 @@ export default function Navbar() {
           </div>
 
           {/* HAMBURGER TOGGLE BUTTON */}
+          {/* Fixed: Configured lines to solid dark parameters to track visibility metrics easily */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden relative z-50 p-2 focus:outline-none cursor-pointer rounded-md transition-colors"
@@ -115,17 +116,17 @@ export default function Navbar() {
             <div className="w-5 h-3.5 flex flex-col justify-between relative">
               <span
                 className={`w-full h-[1.5px] rounded-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${
-                  isOpen ? "bg-neutral-900 rotate-45 translate-y-[6px]" : "bg-white"
+                  isOpen ? "bg-neutral-900 rotate-45 translate-y-[6px]" : "bg-neutral-800"
                 }`}
               />
               <span
-                className={`w-full h-[1.5px] rounded-none transition-all duration-300 ${
-                  isOpen ? "opacity-0 scale-x-0 bg-neutral-900" : "bg-white scale-x-100"
+                className={`w-full h-[1.5px] rounded-none transition-all duration-300 bg-neutral-800 ${
+                  isOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
                 }`}
               />
               <span
                 className={`w-full h-[1.5px] rounded-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${
-                  isOpen ? "bg-neutral-900 -rotate-45 -translate-y-[6px]" : "bg-white"
+                  isOpen ? "bg-neutral-900 -rotate-45 -translate-y-[6px]" : "bg-neutral-800"
                 }`}
               />
             </div>
@@ -134,8 +135,9 @@ export default function Navbar() {
       </header>
 
       {/* ================= MOBILE FULL-SCREEN CANVAS OVERLAY SYSTEM ================= */}
+      {/* Fixed: Configured canvas container overlay background layer to match premium bright cream/white parameters */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden flex flex-col bg-[#fcfbf9] transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
+        className={`fixed inset-0 z-40 lg:hidden flex flex-col bg-[#FAF9F5] transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${
           isOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
         }`}
       >
@@ -175,17 +177,17 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Interactive Fixed Base Contact Box inside Mobile Overlay */}
-          <div className={`w-full max-w-sm mx-auto pt-6 border-t border-neutral-200/60 transition-all duration-700 delay-[400ms] transform ${
+          {/* Solid Base Contact Box inside Mobile Overlay */}
+          <div className={`w-full max-w-sm mx-auto pt-6 border-t border-neutral-200/80 transition-all duration-700 delay-[400ms] transform ${
             isOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}>
             <div className="flex flex-col gap-2.5">
               <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase text-center">Bespoke Advisory Desk</span>
               <a
                 href={`tel:${projectData.contact.phone}`}
-                className="group relative flex items-center justify-center gap-2.5 w-full bg-[#991b1b] text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-[0.15em] shadow-xl overflow-hidden transition-all duration-300 active:scale-[0.99]"
+                className="group relative flex items-center justify-center gap-2.5 w-full bg-[#991b1b] text-white font-bold py-4 rounded-xl text-xs uppercase tracking-[0.15em] shadow-xl overflow-hidden transition-all duration-300 active:scale-[0.99]"
               >
-                <span className="absolute inset-0 bg-neutral-900 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
+                <span className="absolute inset-0 bg-neutral-950 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover:translate-x-0" />
                 <span className="relative z-10 flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

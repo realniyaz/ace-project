@@ -8,25 +8,33 @@ import FloorPlans from "@/components/FloorPlans";
 import Location from "@/components/Location";
 import FooterContact from "@/components/FooterContact";
 import Footer from "@/components/Footer";
+import WelcomeModal from "@/components/WelcomeModal";
+
+// 1. Import the Floating Actions component file
+import FloatingActions from "@/components/FloatingActions";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-white">
-      {/* 1. Global Navigation Bar Component */}
+    <>
+      <WelcomeModal />
       <Navbar />
 
-      {/* 2. Interactive Animated Hero Fold & Lead Form Component */}
-      <Hero />
+      {/* Fixed: Appended explicit lower mobile padding boundaries to clear floating blocks */}
+      <main className="relative min-h-dvh bg-white overflow-x-hidden antialiased pb-[56px] lg:pb-0 selection:bg-[#991b1b]/10 selection:text-[#991b1b]">
+        <Hero />
+        <Overview />
+        <Highlights />
+        <Pricing />
+        <Amenities />
+        <FloorPlans />
+        <Location />
+        <FooterContact />
+      </main>
 
-      {/* Future components will be cleanly appended directly right here as we draft them */}
-      <Overview/>
-      <Highlights/>
-      <Pricing/>
-      <Amenities/>
-      <FloorPlans/>
-      <Location/>
-      <FooterContact/>
-      <Footer/>
-    </div>
+      <Footer />
+
+      {/* 2. Place Floating Actions at the global root bottom level */}
+      <FloatingActions />
+    </>
   );
 }
