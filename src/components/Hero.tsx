@@ -33,7 +33,9 @@ export default function Hero() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // Completely synchronized target endpoint redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -45,8 +47,6 @@ export default function Hero() {
     <section id="hero" className="relative w-full min-h-screen bg-[#FAF9F5] lg:bg-neutral-950 flex flex-col lg:flex-row lg:items-center overflow-hidden pt-16 lg:pt-0">
       
       {/* ================= IMMERSIVE SLIDESHOW CONTAINER ================= */}
-      {/* Mobile: Full-bleed static height frame on top without overlay masks */}
-      {/* Desktop: Spans full screen canvas boundaries absolute behind panels */}
       <div className="relative w-full h-[40vh] sm:h-[45vh] lg:absolute lg:inset-0 lg:h-full z-0 shrink-0">
         {bannerSlides.map((slide, index) => (
           <div
@@ -64,22 +64,17 @@ export default function Hero() {
             />
           </div>
         ))}
-        {/* Layer masks are strictly isolated to desktop screens to keep mobile view 100% clean and bright */}
         <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-black/90 via-black/50 to-black/80 z-20" />
         <div className="hidden lg:block absolute inset-0 bg-radial-gradient from-transparent via-black/30 to-black/90 z-20" />
       </div>
 
       {/* ================= MAIN CONTENT DECK FRAME WORKSPACE ================= */}
-      {/* Mobile: Stacks naturally below the image block frame container */}
       <div className="relative z-30 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-0 flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
           
           {/* LEFT SIDE BLOCK: ARCHITECTURAL TECHNICAL HEADERS */}
-          {/* Mobile: Inverted text presentation coloring token layout system */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 lg:space-y-6 text-neutral-900 lg:text-white animate-fade-in-up">
-            
             <div className="space-y-3.5 sm:space-y-4">
-              {/* Branded Status Badge */}
               <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 lg:bg-[#991b1b]/15 border border-[#991b1b]/30 lg:border-[#991b1b]/40 px-3 py-1 rounded-none backdrop-blur-md">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
                 <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] lg:text-white uppercase">{projectData.status}</span>
@@ -121,82 +116,64 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT SIDE BLOCK: PREMIUM LIGHT CONCIERGE FORM CARD */}
-          {/* Positioned cleanly below text layers on mobile screens */}
-          <div className="lg:col-span-5 xl:col-span-4 lg:col-start-8 xl:col-start-9 w-full max-w-md mx-auto lg:mx-0">
-            <div className="bg-white border border-neutral-200/80 p-6 sm:p-8 rounded-2xl shadow-xl lg:shadow-2xl shadow-neutral-950/5 lg:shadow-black/40 transition-all duration-300 relative w-full">
-              <div className="mb-6 text-center lg:text-left space-y-1.5">
-                <h3 className="text-lg font-medium tracking-wide text-neutral-900">
-                  Schedule Private Viewing
-                </h3>
-                <p className="text-[11px] text-neutral-500 font-light tracking-wide leading-relaxed">
-                  Register with our verified consultancy desk for priority allocation and inventory access.
-                </p>
-              </div>
+          {/* RIGHT SIDE BLOCK: PREMIUM LIGHT CONCIERGE MINIMAL FORM CARD */}
+          <div className="lg:col-span-5 xl:col-span-4 lg:col-start-8 xl:col-start-9 w-full max-w-sm mx-auto lg:mx-0">
+            <div className="bg-white border border-neutral-200 w-full rounded-2xl p-6 shadow-xl lg:shadow-2xl transition-all duration-300 relative">
+              
+              <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+                Enter Your Details
+              </h3>
               
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
                   <input suppressHydrationWarning
                     type="text"
                     name="name"
                     required
-                    placeholder="Your Full Name"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200/60 rounded-xl px-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
-                  />
-                </div>
-
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2.5">
-                    🇮🇳 +91
-                  </span>
-                  <input suppressHydrationWarning
-                    type="tel"
-                    name="mobile"
-                    required
-                    pattern="[0-9]{10}"
-                    placeholder="Mobile Number"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200/60 rounded-xl pl-16 pr-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
+                    <input suppressHydrationWarning
+                      type="tel"
+                      name="mobile"
+                      required
+                      pattern="[0-9]{10}"
+                      placeholder="10-digit number"
+                      value={formData.mobile}
+                      onChange={handleInputChange}
+                      className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
                   <input suppressHydrationWarning
                     type="email"
                     name="email"
                     required
-                    placeholder="Email Address"
+                    placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200/60 rounded-xl px-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
 
-                <label className="flex items-start gap-3 cursor-pointer group select-none pt-1">
-                  <input suppressHydrationWarning
-                    type="checkbox"
-                    required
-                    defaultChecked
-                    className="mt-0.5 border-neutral-300 bg-white text-[#991b1b] focus:ring-0 focus:ring-offset-0 scale-95 accent-[#991b1b] rounded-sm"
-                  />
-                  <span className="text-[10px] leading-normal text-neutral-500 group-hover:text-neutral-700 transition-colors text-left font-light">
-                    I authorize representatives to Call, SMS, Email or WhatsApp me regarding this property. This overrides DND registry.
-                  </span>
-                </label>
-
-                {/* Secure Action Submit Button Layer Locked to Solid Branded Red Color */}
                 <button suppressHydrationWarning
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-[0.15em] py-4 rounded-xl shadow-lg transition-all duration-500 overflow-hidden active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none group/btn cursor-pointer"
+                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
                 >
-                  <span className="absolute inset-0 bg-neutral-950 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
-                  <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-200">
-                    {isSubmitting ? "Processing Request..." : "Request Call Back"}
-                  </span>
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </form>
             </div>

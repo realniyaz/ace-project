@@ -28,8 +28,10 @@ export default function Overview() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsModalOpen(false);
+      
+      // Completely synchronized target endpoint redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -87,9 +89,9 @@ export default function Overview() {
             </p>
           </div>
 
-          <button
+          <button suppressHydrationWarning
             onClick={() => setIsModalOpen(true)}
-            className="w-full relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 transition-all duration-500 overflow-hidden active:scale-[0.99] group/btn cursor-pointer shadow-md rounded-xl"
+            className="w-full relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 transition-all duration-500 overflow-hidden active:scale-[0.99] group/btn cursor-pointer shadow-md rounded-xl border-none"
           >
             <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
             <span className="relative z-10 flex items-center justify-center gap-2">
@@ -128,7 +130,7 @@ export default function Overview() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-md active:scale-99"
+            className="w-full bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-md active:scale-99 border-none cursor-pointer"
           >
             Download Brochure
           </button>
@@ -140,7 +142,7 @@ export default function Overview() {
             <div
               key={image.id}
               onClick={() => setActiveLightboxImg(image.src)}
-              className="relative aspect-square bg-white p-2 border border-neutral-200/80 shadow-md rounded-2xl active:scale-98 transition-all"
+              className="relative aspect-square bg-white p-2 border border-neutral-200/80 shadow-md rounded-2xl active:scale-98 transition-all cursor-pointer"
             >
               <div className="relative w-full h-full rounded-xl overflow-hidden bg-neutral-100">
                 <Image
@@ -158,8 +160,8 @@ export default function Overview() {
 
       {/* ================= LIGHTBOX PREVIEW POPUP ================= */}
       {activeLightboxImg && (
-        <div className="fixed inset-0 z-110 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in" onClick={() => setActiveLightboxImg(null)}>
-          <button onClick={() => setActiveLightboxImg(null)} className="absolute top-6 right-6 text-white/70 hover:text-white p-2 rounded-full bg-white/10 cursor-pointer">
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in" onClick={() => setActiveLightboxImg(null)}>
+          <button onClick={() => setActiveLightboxImg(null)} className="absolute top-6 right-6 text-white/70 hover:text-white p-2 rounded-full bg-white/10 cursor-pointer border-none">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -172,73 +174,70 @@ export default function Overview() {
 
       {/* ================= POPUP LEAD INQUIRY FORM MODAL ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 animate-fade-in animate-duration-200">
-          <div className="absolute inset-0 bg-neutral-950/70 backdrop-blur-md" onClick={() => setIsModalOpen(false)} />
-          <div className="relative bg-white border border-neutral-100 w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl z-10 animate-fade-in-up">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-full cursor-pointer">
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+          <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
+          
+          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">Unlock Project Brochure</h3>
-              <p className="text-xs text-neutral-400 mt-1">Please enter your details to receive full specifications and layouts instantly.</p>
-            </div>
+            <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+              Enter Your Details
+            </h3>
 
             <form onSubmit={handleModalSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Full Name</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="Enter your full name"
+                  placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Mobile Contact</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2">🇮🇳 +91</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
                   <input
                     type="tel"
                     name="mobile"
                     required
                     pattern="[0-9]{10}"
-                    placeholder="10 digit mobile number"
+                    placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-20 pr-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Email Address</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   required
-                  placeholder="name@example.com"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-4 bg-[#991b1b] text-white font-bold text-sm py-4 rounded-xl shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none active:scale-[0.99] cursor-pointer"
+                className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                <div className={`absolute inset-0 bg-neutral-950 transition-transform duration-500 origin-left ${isSubmitting ? "translate-x-0" : "-translate-x-full"}`} />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? "Generating Download Link..." : "Access Brochure Now"}
-                </span>
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>

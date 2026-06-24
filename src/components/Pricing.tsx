@@ -25,8 +25,10 @@ export default function Pricing() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsModalOpen(false);
+      
+      // Completely synchronized target endpoint redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -79,6 +81,7 @@ export default function Pricing() {
                   <span className="text-sm font-medium text-neutral-900 uppercase tracking-wide">
                     {item.name}
                   </span>
+                  
                   {/* Blueprint geometry icon metadata trace */}
                   <svg className="w-4 h-4 text-neutral-300 group-hover:text-[#991b1b] md:block hidden transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -112,7 +115,7 @@ export default function Pricing() {
                 <div className="col-span-1 md:col-span-2 pt-2 md:pt-0">
                   <button suppressHydrationWarning
                     onClick={() => openEnquiry(item.name)}
-                    className="w-full relative bg-neutral-950 text-white font-bold text-[11px] uppercase tracking-widest py-3 shadow-md rounded-xl md:rounded-none overflow-hidden group/btn cursor-pointer transition-all duration-300"
+                    className="w-full relative bg-neutral-950 text-white font-bold text-[11px] uppercase tracking-widest py-3 shadow-md rounded-xl md:rounded-none overflow-hidden group/btn cursor-pointer transition-all duration-300 border-none"
                   >
                     <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
                     <span className="relative z-10 flex items-center justify-center gap-1.5">
@@ -133,80 +136,74 @@ export default function Pricing() {
 
       {/* ================= INQUIRY SCREEN DIALOG POPUP OVERLAY MODAL ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 animate-fade-in animate-duration-200">
-          <div className="absolute inset-0 bg-neutral-950/70 backdrop-blur-md" onClick={() => setIsModalOpen(false)} />
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+          <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
           
-          <div className="relative bg-white border border-neutral-100 w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl z-10 animate-fade-in-up">
+          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
             <button suppressHydrationWarning
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-full cursor-pointer"
-              aria-label="Close form view"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none"
+              aria-label="Close"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">Request Pricing Ledger</h3>
-              <p className="text-xs text-[#991b1b] font-bold uppercase tracking-wider mt-1">
-                Config Selected: {selectedConfig}
-              </p>
-            </div>
+            <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+              Enter Your Details
+            </h3>
 
             <form onSubmit={handlePricingSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Full Name</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
                 <input suppressHydrationWarning
                   type="text"
                   name="name"
                   required
-                  placeholder="Enter your name"
+                  placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Mobile Contact</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2">🇮🇳 +91</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
                   <input suppressHydrationWarning
                     type="tel"
                     name="mobile"
                     required
                     pattern="[0-9]{10}"
-                    placeholder="10 digit mobile code"
+                    placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-20 pr-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Email Address</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
                 <input suppressHydrationWarning
                   type="email"
                   name="email"
                   required
-                  placeholder="name@example.com"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-4 bg-[#991b1b] text-white font-bold text-sm py-4 rounded-xl shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none active:scale-[0.99] cursor-pointer"
+                className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                <div className={`absolute inset-0 bg-neutral-950 transition-transform duration-500 origin-left ${isSubmitting ? "translate-x-0" : "-translate-x-full"}`} />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? "Transmitting Profile..." : "Access Pricing File"}
-                </span>
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>

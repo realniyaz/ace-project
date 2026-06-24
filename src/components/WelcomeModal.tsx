@@ -33,9 +33,12 @@ export default function WelcomeModal() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      // API payload dispatch destination hook goes here if needed
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsOpen(false);
       sessionStorage.setItem("welcome_modal_triggered", "true");
+      
+      // Clear local routing states and throw natively to the thank you layout frame
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -51,10 +54,10 @@ export default function WelcomeModal() {
       
       <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
         
-        {/* Dismiss Button */}
+        {/* Dismiss Trigger */}
         <button 
           onClick={handleClose} 
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 cursor-pointer transition-colors"
+          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 cursor-pointer transition-colors rounded-full"
           aria-label="Close"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -113,7 +116,7 @@ export default function WelcomeModal() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer"
+            className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

@@ -29,8 +29,10 @@ export default function FloorPlans() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsModalOpen(false);
+      
+      // Completely synchronized target endpoint redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -58,7 +60,6 @@ export default function FloorPlans() {
         </div>
 
         {/* ================= TOUCH-OPTIMIZED SEGMENT TAB SWIPER ================= */}
-        {/* Centers tabs perfectly on mobile viewports using justify-center while remaining scrollable if oversized */}
         <div className="flex justify-center border-b border-neutral-200 overflow-x-auto scrollbar-none snap-x pb-px">
           <div className="flex gap-4 sm:gap-8 whitespace-nowrap px-4 justify-center w-full md:w-auto">
             {projectData.configurations.map((config, idx) => (
@@ -81,14 +82,13 @@ export default function FloorPlans() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-white border border-neutral-200/80 rounded-2xl shadow-xl shadow-neutral-950/5 overflow-hidden p-4 sm:p-6 lg:p-8">
           
           {/* LEFT COLUMN: PERMANENTLY BLURRED GRAPHIC VIEWPORT CANVAS */}
-          {/* Added dynamic key constraint trigger to handle layout re-renders cleanly when updating current configurations */}
           <div className="lg:col-span-7 relative w-full h-[280px] sm:h-[380px] lg:h-auto min-h-[300px] bg-neutral-50 rounded-xl overflow-hidden group/blueprint border border-neutral-100 flex items-center justify-center">
             <div key={activeTab} className="relative w-full h-full flex items-center justify-center animate-fade-in animate-duration-500">
               <Image
                 src={floorPlanImages[activeTab] || "/floorplan-placeholder.jpg"}
                 alt={`${currentConfig?.name || "Property"} Blueprint Layout`}
                 fill
-                className="object-contain p-6 transition-all duration-300 filter blur-xl scale-95 opacity-30 select-none pointer-events-none"
+                className="object-contain p-6 filter blur-xl scale-95 opacity-30 select-none pointer-events-none"
                 priority
               />
             </div>
@@ -104,12 +104,10 @@ export default function FloorPlans() {
               </div>
             </div>
 
-            {/* Outer corner frame dashed lines decor */}
             <span className="absolute inset-3 border border-dashed border-neutral-300/60 rounded-lg pointer-events-none z-10" />
           </div>
 
           {/* RIGHT COLUMN: METRIC SPEC SIDEBAR CONTROLS */}
-          {/* Centered for mobile layout viewports (`text-center lg:text-left`) and dynamically updates active text instances smoothly */}
           <div key={`sidebar-${activeTab}`} className="lg:col-span-5 flex flex-col justify-between p-2 sm:p-4 text-center lg:text-left space-y-6 lg:space-y-0 animate-fade-in animate-duration-300">
             
             <div className="space-y-4">
@@ -143,7 +141,7 @@ export default function FloorPlans() {
             {/* Premium action pipeline trigger */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full max-w-sm mx-auto lg:mx-0 relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl overflow-hidden group/btn cursor-pointer shadow-md transition-all duration-500"
+              className="w-full max-w-sm mx-auto lg:mx-0 relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl overflow-hidden group/btn cursor-pointer shadow-md transition-all duration-500 border-none"
             >
               <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -161,76 +159,74 @@ export default function FloorPlans() {
 
       {/* ================= PRIVACY DIALOG CAPTURE LEADS MODAL ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-fade-in animate-duration-200">
-          <div className="absolute inset-0 bg-neutral-950/70 backdrop-blur-md" onClick={() => setIsModalOpen(false)} />
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+          <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
           
-          <div className="relative bg-white border border-neutral-100 w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl z-10 animate-fade-in-up">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1 rounded-full cursor-pointer">
+          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
+            <button 
+              onClick={() => setIsModalOpen(false)} 
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none"
+              aria-label="Close"
+            >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">Unlock High-Res Structural Files</h3>
-              <p className="text-xs text-[#991b1b] font-bold uppercase tracking-wider mt-1">
-                Blueprint Requested: {currentConfig?.name} Suite
-              </p>
-            </div>
+            <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+              Enter Your Details
+            </h3>
 
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Full Name</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="Enter your name"
+                  placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Mobile Contact</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2">🇮🇳 +91</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
                   <input
                     type="tel"
                     name="mobile"
                     required
                     pattern="[0-9]{10}"
-                    placeholder="10 digit mobile verification code"
+                    placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-20 pr-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-neutral-600 mb-1">Email Address</label>
+                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   required
-                  placeholder="name@example.com"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-4 bg-[#991b1b] text-white font-bold text-sm py-4 rounded-xl shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:pointer-events-none active:scale-[0.99] cursor-pointer"
+                className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                <div className={`absolute inset-0 bg-neutral-950 transition-transform duration-500 origin-left ${isSubmitting ? "translate-x-0" : "-translate-x-full"}`} />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? "Verifying Authorization..." : "Request Access Token"}
-                </span>
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>

@@ -18,7 +18,9 @@ export default function FooterContact() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // Completely synchronized target endpoint redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -65,73 +67,61 @@ export default function FooterContact() {
 
           {/* RIGHT SIDE: PREMIUM BRIGHT THEMING LEAD FORM */}
           <div className="lg:col-span-5 w-full flex">
-            <div className="bg-white border border-neutral-200/80 p-6 sm:p-8 rounded-2xl shadow-xl shadow-neutral-950/5 flex flex-col justify-center w-full relative">
-              <h3 className="text-xs font-bold tracking-[0.15em] uppercase text-neutral-800 mb-6 text-center lg:text-left">
-                Send Direct Message
+            <div className="bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl flex flex-col justify-center mx-auto relative">
+              <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+                Enter Your Details
               </h3>
               
               <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
                   <input
                     type="text"
                     name="name"
                     required
-                    placeholder="Your Full Name"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50/80 border border-neutral-200/80 rounded-xl px-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
-                  />
-                </div>
-
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200/80 pr-2.5">
-                    🇮🇳 +91
-                  </span>
-                  <input
-                    type="tel"
-                    name="mobile"
-                    required
-                    pattern="[0-9]{10}"
-                    placeholder="Mobile Contact"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    className="w-full bg-neutral-50/80 border border-neutral-200/80 rounded-xl pl-16 pr-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
+                    <input
+                      type="tel"
+                      name="mobile"
+                      required
+                      pattern="[0-9]{10}"
+                      placeholder="10-digit number"
+                      value={formData.mobile}
+                      onChange={handleInputChange}
+                      className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="Email Address"
+                    placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50/80 border border-neutral-200/80 rounded-xl px-4 py-3.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
                   />
                 </div>
-
-                <label className="flex items-start gap-3 cursor-pointer group select-none py-1">
-                  <input
-                    type="checkbox"
-                    required
-                    defaultChecked
-                    className="mt-0.5 border-neutral-300 bg-white text-[#991b1b] focus:ring-0 focus:ring-offset-0 scale-95 accent-[#991b1b] rounded-sm"
-                  />
-                  <span className="text-[10px] leading-relaxed text-neutral-500 group-hover:text-neutral-700 transition-colors text-left font-light">
-                    I authorize verified project representatives to Call, SMS, Email or WhatsApp me regarding this property. This overrides DND/NDNC registries completely.
-                  </span>
-                </label>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-md transition-all duration-500 overflow-hidden disabled:opacity-70 disabled:pointer-events-none group/btn cursor-pointer active:scale-[0.99]"
+                  className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
                 >
-                  <span className="absolute inset-0 bg-neutral-950 transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {isSubmitting ? "Transmitting Profile..." : "Submit Inquiry"}
-                  </span>
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </form>
             </div>
