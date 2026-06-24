@@ -63,7 +63,7 @@ export default function FloorPlans() {
         <div className="flex justify-center border-b border-neutral-200 overflow-x-auto scrollbar-none snap-x pb-px">
           <div className="flex gap-4 sm:gap-8 whitespace-nowrap px-4 justify-center w-full md:w-auto">
             {projectData.configurations.map((config, idx) => (
-              <button
+              <button suppressHydrationWarning
                 key={config.name}
                 onClick={() => setActiveTab(idx)}
                 className={`pb-4 text-xs uppercase tracking-[0.15em] font-bold border-b-2 transition-all duration-300 relative snap-center cursor-pointer ${

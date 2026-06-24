@@ -50,7 +50,7 @@ export default function FloatingActions() {
         </a>
 
         {/* ACTION 2: CRM POPUP TRIGGER (ACE Crimson Red on Mobile, White Circle on Desktop) */}
-        <button
+        <button suppressHydrationWarning
           onClick={() => setIsEnquireOpen(true)}
           className="flex-1 lg:flex-none flex items-center justify-center bg-[#991b1b] text-white lg:w-14 lg:h-14 lg:bg-white lg:text-[#991b1b] lg:border lg:border-neutral-200/80 lg:rounded-full lg:shadow-xl hover:lg:bg-neutral-50 transition-all duration-300 group cursor-pointer border-none"
           title="Enquire Now"

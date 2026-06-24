@@ -33,9 +33,10 @@ export default function Hero() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Direct, optimized synchronization simulation step
+      await new Promise((resolve) => setTimeout(resolve, 800));
       
-      // Completely synchronized target endpoint redirection sequence
+      // Target viewport workspace redirection routing path
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -116,7 +117,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT SIDE BLOCK: PREMIUM LIGHT CONCIERGE MINIMAL FORM CARD */}
+          {/* RIGHT SIDE BLOCK: FORM CARD */}
           <div className="lg:col-span-5 xl:col-span-4 lg:col-start-8 xl:col-start-9 w-full max-w-sm mx-auto lg:mx-0">
             <div className="bg-white border border-neutral-200 w-full rounded-2xl p-6 shadow-xl lg:shadow-2xl transition-all duration-300 relative">
               

@@ -33,12 +33,12 @@ export default function WelcomeModal() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // API payload dispatch destination hook goes here if needed
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulation delay for smooth user feedback transition
+      await new Promise((resolve) => setTimeout(resolve, 800));
       setIsOpen(false);
       sessionStorage.setItem("welcome_modal_triggered", "true");
       
-      // Clear local routing states and throw natively to the thank you layout frame
+      // Navigate cleanly straight to the confirmation layout context frame
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -49,77 +49,79 @@ export default function WelcomeModal() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs select-none animate-fade-in">
       <div className="absolute inset-0" onClick={handleClose} />
       
-      <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
+      {/* Container structured with your premium dark background palette profile */}
+      <div className="relative bg-[#1A3B4E] border border-white/10 w-full max-w-sm rounded-xl p-7 shadow-2xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none animate-scale-up">
         
-        {/* Dismiss Trigger */}
+        {/* Precise Cross Dismissal Button Anchor */}
         <button 
           onClick={handleClose} 
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 cursor-pointer transition-colors rounded-full"
+          className="absolute top-4 right-4 text-white/70 hover:text-white p-1 cursor-pointer transition-colors"
           aria-label="Close"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
-          Enter Your Details
+        {/* Heading text structure directly synchronized from your layout screenshot reference */}
+        <h3 className="text-xl font-medium text-white tracking-wide text-center mt-2 mb-6">
+          Get More Details Enquire Now
         </h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
             <input
               type="text"
               name="name"
               required
-              placeholder="Name"
+              placeholder="Name*"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+              className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-sm text-white placeholder-white/60 focus:outline-none focus:border-white transition-all font-light"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-white/60 font-light border-r border-white/20 pr-2.5">+91</span>
               <input
                 type="tel"
                 name="mobile"
                 required
                 pattern="[0-9]{10}"
-                placeholder="10-digit number"
+                placeholder="Mobile*"
                 value={formData.mobile}
                 onChange={handleInputChange}
-                className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                className="w-full bg-transparent border border-white/30 rounded-none pl-16 pr-4 py-3 text-sm text-white placeholder-white/60 focus:outline-none focus:border-white transition-all font-light"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
             <input
               type="email"
               name="email"
               required
-              placeholder="Email"
+              placeholder="Email*"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+              className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-sm text-white placeholder-white/60 focus:outline-none focus:border-white transition-all font-light"
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
-          >
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </button>
+          {/* Button maintaining your luxury project aesthetic parameters */}
+          <div className="pt-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-auto bg-[#BC8A6B] hover:bg-[#A37457] text-white text-sm tracking-wide px-8 py-2.5 rounded-none transition-all duration-300 active:scale-[0.98] disabled:opacity-70 cursor-pointer border-none font-light"
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
