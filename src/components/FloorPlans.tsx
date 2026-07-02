@@ -41,7 +41,7 @@ export default function FloorPlans() {
   };
 
   return (
-    <section id="floor-plans" className="relative pb-20 lg:pb-28 pt-0 px-4 sm:px-6 lg:px-8 bg-[#FAF9F5] overflow-hidden select-none">
+    <section id="floor-plans" className="relative pb-20 lg:pb-28 pt-0 px-4 sm:px-6 lg:px-8 bg-brand-cream overflow-hidden select-none">
       
       {/* Light subtle geometric layout line vector textures */}
       <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
@@ -50,11 +50,12 @@ export default function FloorPlans() {
         
         {/* ================= EDITORIAL SECTION HEADERS ================= */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-3 py-1 rounded-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
-            <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] uppercase">Architectural Blueprints</span>
+          {/* Swapped crimson tag decoration over to luxury gold tokens */}
+          <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
+            <span className="text-[10px] font-bold tracking-[0.2em] text-brand-gold uppercase">Architectural Blueprints</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-neutral-950">
+          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-brand-dark font-serif">
             Bespoke Layout Engineering
           </h2>
         </div>
@@ -68,7 +69,7 @@ export default function FloorPlans() {
                 onClick={() => setActiveTab(idx)}
                 className={`pb-4 text-xs uppercase tracking-[0.15em] font-bold border-b-2 transition-all duration-300 relative snap-center cursor-pointer ${
                   activeTab === idx
-                    ? "border-[#991b1b] text-[#991b1b]"
+                    ? "border-brand-gold text-brand-gold"
                     : "border-transparent text-neutral-400 hover:text-neutral-700"
                 }`}
               >
@@ -96,10 +97,10 @@ export default function FloorPlans() {
             {/* Permanent Gated Security Layout Prompt Overlay */}
             <div className="absolute inset-0 bg-neutral-900/[0.02] flex items-center justify-center p-6 z-20">
               <div className="bg-white/95 backdrop-blur-md px-5 py-5 text-center border border-neutral-200/80 shadow-xl max-w-xs rounded-xl">
-                <svg className="w-5 h-5 text-[#991b1b] mx-auto mb-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-5 h-5 text-brand-gold mx-auto mb-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <h4 className="text-xs font-bold text-neutral-900 uppercase tracking-wider">Confidential Layout Blueprint</h4>
+                <h4 className="text-xs font-bold text-brand-dark uppercase tracking-wider">Confidential Layout Blueprint</h4>
                 <p className="text-[10px] text-neutral-400 font-light mt-1 leading-normal">High-resolution blueprint files are secure. Please request verified digital access below.</p>
               </div>
             </div>
@@ -112,8 +113,8 @@ export default function FloorPlans() {
             
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[9px] font-bold tracking-[0.15em] text-[#991b1b] uppercase block">Active Typology</span>
-                <h3 className="text-2xl sm:text-3xl font-light text-neutral-900 tracking-tight">
+                <span className="text-[9px] font-bold tracking-[0.15em] text-brand-gold uppercase block">Active Typology</span>
+                <h3 className="text-2xl sm:text-3xl font-light text-brand-dark tracking-tight font-serif">
                   {currentConfig?.name} Luxury Suite
                 </h3>
               </div>
@@ -126,24 +127,24 @@ export default function FloorPlans() {
             <div className="border-t border-b border-neutral-100 py-4 space-y-3 text-xs tracking-wide text-neutral-600 font-light max-w-sm mx-auto lg:mx-0 w-full">
               <div className="flex justify-between items-center px-1">
                 <span className="text-neutral-400">Super Area Spec</span>
-                <span className="text-neutral-900 font-mono font-medium">{currentConfig?.size}</span>
+                <span className="text-brand-dark font-mono font-medium">{currentConfig?.size}</span>
               </div>
               <div className="flex justify-between items-center px-1">
                 <span className="text-neutral-400">Ventilation Matrix</span>
-                <span className="text-neutral-900 font-medium">Dual-Faceted Wide Flow</span>
+                <span className="text-brand-dark font-medium">Dual-Faceted Wide Flow</span>
               </div>
               <div className="flex justify-between items-center px-1">
                 <span className="text-neutral-400">Balcony Allocations</span>
-                <span className="text-neutral-900 font-medium">Double Deck Continuous</span>
+                <span className="text-brand-dark font-medium">Double Deck Continuous</span>
               </div>
             </div>
 
-            {/* Premium action pipeline trigger */}
+            {/* Premium Gold Action Trigger configuration */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full max-w-sm mx-auto lg:mx-0 relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl overflow-hidden group/btn cursor-pointer shadow-md transition-all duration-500 border-none"
+              className="w-full max-w-sm mx-auto lg:mx-0 relative bg-brand-dark text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl overflow-hidden group/btn cursor-pointer shadow-md transition-all duration-500 border-none"
             >
-              <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
+              <span className="absolute inset-0 bg-brand-gold transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Unlock High-Res Blueprints
                 <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -159,10 +160,10 @@ export default function FloorPlans() {
 
       {/* ================= PRIVACY DIALOG CAPTURE LEADS MODAL ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-brand-dark/50 backdrop-blur-xs select-none">
           <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
           
-          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
+          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none animate-scale-up">
             <button 
               onClick={() => setIsModalOpen(false)} 
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none"
@@ -173,13 +174,13 @@ export default function FloorPlans() {
               </svg>
             </button>
 
-            <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+            <h3 className="text-lg font-medium text-brand-dark tracking-tight text-center mb-5 font-serif">
               Enter Your Details
             </h3>
 
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Full Name</label>
                 <input
                   type="text"
                   name="name"
@@ -187,12 +188,12 @@ export default function FloorPlans() {
                   placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Mobile Number</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
                   <input
@@ -203,13 +204,13 @@ export default function FloorPlans() {
                     placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Email Address</label>
                 <input
                   type="email"
                   name="email"
@@ -217,14 +218,14 @@ export default function FloorPlans() {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
+                className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>

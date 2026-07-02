@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { projectData } from "@/config/projectData";
 
 export default function WelcomeModal() {
   const router = useRouter();
@@ -33,12 +34,9 @@ export default function WelcomeModal() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Clean synchronization simulation layer
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsOpen(false);
       sessionStorage.setItem("welcome_modal_triggered", "true");
-      
-      // Target viewport workspace redirection sequence
       router.push("/thank-you");
     } catch (error) {
       console.error(error);
@@ -49,78 +47,120 @@ export default function WelcomeModal() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-neutral-950/60 backdrop-blur-xs select-none">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-brand-dark/80 backdrop-blur-md select-none">
       <div className="absolute inset-0" onClick={handleClose} />
       
-      {/* Brand Identity Layout Frame: Elegant White Container Card Block */}
-      <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-7 shadow-2xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none animate-fade-in-up">
+      {/* ================= EDITORIAL ASYMMETRIC OVERLAY MODAL ================= */}
+      <div className="relative bg-white w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl z-10 max-h-[90vh] flex flex-col md:flex-row border border-neutral-200/60 animate-scale-up">
         
         {/* Precise Cross Dismissal Trigger */}
         <button 
           onClick={handleClose} 
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 cursor-pointer transition-colors rounded-full"
+          className="absolute top-4 right-4 text-neutral-400 hover:text-brand-dark p-1.5 cursor-pointer transition-colors rounded-full z-30 bg-neutral-50 md:bg-white/10 md:hover:bg-white/20 md:text-white/70 md:hover:text-white border-none"
           aria-label="Close"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        {/* Brand Header Setup Block: High Contrast Bold Black Title Grid Text */}
-        <h3 className="text-xl font-medium text-neutral-950 tracking-tight text-center mt-2 mb-6">
-          Get More Details Enquire Now
-        </h3>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              name="name"
-              required
-              placeholder="Name*"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
-            />
+        {/* LEFT COLUMN: BRAND PROFILE INSIGNIA (Hidden on compact mobile screens) */}
+        <div className="hidden md:flex md:w-5/12 bg-brand-dark p-8 flex-col justify-between relative text-left">
+          {/* Ambient vector lighting */}
+          <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
+          
+          <div className="space-y-4 relative z-10">
+            <div className="inline-flex items-center gap-2 bg-brand-gold/20 border border-brand-gold/30 px-2.5 py-0.5 rounded-none">
+              <span className="w-1 h-1 rounded-full bg-brand-gold animate-pulse" />
+              <span className="text-[9px] font-bold tracking-widest text-brand-gold-light uppercase">Exclusive Invitation</span>
+            </div>
+            <h4 className="text-xl font-light text-white leading-tight font-serif tracking-wide">
+              Bespoke Private Residences
+            </h4>
+            <p className="text-[11px] text-neutral-400 font-light leading-relaxed">
+              Access digital priority allocation inventory documents, real-time availability configurations, and structural engineering specification guides instantly.
+            </p>
           </div>
 
-          <div>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2 pr-2.5">+91</span>
-              <input
-                type="tel"
-                name="mobile"
+          <div className="pt-6 border-t border-white/10 relative z-10">
+            <span className="text-[9px] font-mono tracking-widest uppercase text-brand-gold-light block">Location Priority Hub</span>
+            <span className="text-xs font-light text-neutral-300 block mt-0.5">Sector 150, Noida</span>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: HIGH-END DIGITAL PRESETS LEAD DECK */}
+        <div className="w-full md:w-7/12 p-6 sm:p-8 flex flex-col justify-center bg-white">
+          <div className="text-center md:text-left mb-6 space-y-1.5">
+            <span className="md:hidden text-[9px] font-bold tracking-[0.2em] text-brand-gold uppercase block mb-1">Bespoke Advisory Desk</span>
+            <h3 className="text-xl font-medium text-brand-dark tracking-tight font-serif">
+              Unlock Verified Access
+            </h3>
+            <p className="text-xs text-neutral-500 font-light leading-normal">
+              Register below to coordinate directly with an allocation asset executive.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4 text-left">
+            <div className="space-y-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 ml-1">Full Name</label>
+              <input suppressHydrationWarning
+                type="text"
+                name="name"
                 required
-                pattern="[0-9]{10}"
-                placeholder="Mobile*"
-                value={formData.mobile}
+                placeholder="Enter your name"
+                value={formData.name}
                 onChange={handleInputChange}
-                className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all shadow-xs"
               />
             </div>
-          </div>
 
-          <div>
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="Email*"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
-            />
-          </div>
+            <div className="space-y-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 ml-1">Mobile Contact</label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2.5 font-mono">+91</span>
+                <input suppressHydrationWarning
+                  type="tel"
+                  name="mobile"
+                  required
+                  pattern="[0-9]{10}"
+                  placeholder="10-digit number"
+                  value={formData.mobile}
+                  onChange={handleInputChange}
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-16 pr-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all shadow-xs"
+                />
+              </div>
+            </div>
 
-          {/* Action Trigger Interface: Hallmark Crimson Red Structural Button Element */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
-          >
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </button>
-        </form>
+            <div className="space-y-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 ml-1">Email Address</label>
+              <input suppressHydrationWarning
+                type="email"
+                name="email"
+                required
+                placeholder="name@example.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all shadow-xs"
+              />
+            </div>
+
+            {/* Master Executive Action Blueprint Trigger */}
+            <button suppressHydrationWarning
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full relative mt-3 bg-brand-gold text-white font-bold text-xs uppercase tracking-[0.15em] py-4 rounded-xl shadow-lg overflow-hidden disabled:opacity-70 group/btn cursor-pointer active:scale-[0.99] border-none transition-all duration-300"
+            >
+              <span className="absolute inset-0 bg-brand-gold-dark transition-transform duration-500 origin-left -translate-x-full group-hover/btn:translate-x-0" />
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                {isSubmitting ? "Verifying Credentials..." : "Request Call Back"}
+                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </span>
+            </button>
+          </form>
+        </div>
+        
       </div>
     </div>
   );

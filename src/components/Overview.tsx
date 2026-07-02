@@ -40,7 +40,7 @@ export default function Overview() {
   };
 
   return (
-    <section id="overview" className="relative py-16 lg:py-0 lg:h-[100vh] min-h-screen lg:min-h-[850px] bg-[#FAF9F5] flex items-center justify-center overflow-hidden">
+    <section id="overview" className="relative py-16 lg:py-0 lg:h-[100vh] min-h-screen lg:min-h-[850px] bg-brand-cream flex items-center justify-center overflow-hidden">
       
       {/* Light subtle geometric background token texture */}
       <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
@@ -53,7 +53,7 @@ export default function Overview() {
           <div
             key={image.id}
             onClick={() => setActiveLightboxImg(image.src)}
-            className={`absolute ${image.position} w-[24%] xl:w-[22%] h-[42%] bg-white p-3 rounded-2xl border border-neutral-200/80 shadow-lg group cursor-pointer transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) hover:-translate-y-2 hover:shadow-2xl hover:border-[#991b1b]/30`}
+            className={`absolute ${image.position} w-[24%] xl:w-[22%] h-[42%] bg-white p-3 rounded-2xl border border-neutral-200/80 shadow-lg group cursor-pointer transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) hover:-translate-y-2 hover:shadow-2xl hover:border-brand-gold/40`}
           >
             <div className="relative w-full h-full bg-neutral-100 rounded-xl overflow-hidden">
               <Image
@@ -71,18 +71,18 @@ export default function Overview() {
         {/* FLOATING CENTRAL EDITORIAL CONTENT CARD */}
         <div className="relative z-30 max-w-xl w-full bg-white border border-neutral-200/70 p-10 xl:p-12 rounded-2xl shadow-2xl text-center space-y-6 flex flex-col items-center transform -translate-y-2 transition-transform duration-500">
           <div className="space-y-3 w-full">
-            <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-3 py-1 rounded-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" />
-              <span className="text-[10px] font-bold tracking-[0.2em] text-[#991b1b] uppercase">ACE Signature • Editorial Overview</span>
+            <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
+              <span className="text-[10px] font-bold tracking-[0.2em] text-brand-gold uppercase">ACE Signature • Editorial Overview</span>
             </div>
-            <h2 className="text-3xl xl:text-4xl font-extralight tracking-tight text-neutral-950 leading-tight">
+            <h2 className="text-3xl xl:text-4xl font-light tracking-tight text-brand-dark leading-tight font-serif">
               {projectData.title}
             </h2>
           </div>
 
           <div className="text-neutral-600 space-y-4 text-xs xl:text-sm leading-relaxed font-light text-center">
             <p>
-              <strong className="font-medium text-neutral-900">ACE Sector 150 Noida</strong> is an upcoming ultra-luxury residential development that redefines modern living with its elegant architecture, spacious residences, and premium lifestyle amenities. The project combines contemporary aesthetics with functional layouts and absolute architectural clarity.
+              <strong className="font-medium text-brand-dark">ACE Sector 150 Noida</strong> is an upcoming ultra-luxury residential development that redefines modern living with its elegant architecture, spacious residences, and premium lifestyle amenities. The project combines contemporary aesthetics with functional layouts and absolute architectural clarity.
             </p>
             <p>
               Strategically positioned in the expansive green space of Sector 150, Noida, this iconic development features direct line highway interfaces while prioritizing personal space and an ecosystem layout model.
@@ -91,9 +91,9 @@ export default function Overview() {
 
           <button suppressHydrationWarning
             onClick={() => setIsModalOpen(true)}
-            className="w-full relative bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-4 transition-all duration-500 overflow-hidden active:scale-[0.99] group/btn cursor-pointer shadow-md rounded-xl border-none"
+            className="w-full relative bg-brand-dark text-white font-bold text-xs uppercase tracking-widest py-4 transition-all duration-500 overflow-hidden active:scale-[0.99] group/btn cursor-pointer shadow-md rounded-xl border-none"
           >
-            <span className="absolute inset-0 bg-[#991b1b] transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
+            <span className="absolute inset-0 bg-brand-gold transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) origin-left -translate-x-full group-hover/btn:translate-x-0" />
             <span className="relative z-10 flex items-center justify-center gap-2">
               Download Brochure
               <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -111,17 +111,17 @@ export default function Overview() {
         {/* TEXT OVERVIEW PACKET CARD */}
         <div className="bg-white border border-neutral-200/60 p-6 sm:p-8 rounded-2xl shadow-xl space-y-5 text-center flex flex-col items-center">
           <div className="space-y-2 w-full">
-            <div className="inline-flex items-center gap-2 bg-[#991b1b]/10 border border-[#991b1b]/20 px-2.5 py-0.5 rounded-xs">
-              <span className="text-[9px] font-bold tracking-wider text-[#991b1b] uppercase">Editorial Overview</span>
+            <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-2.5 py-0.5 rounded-xs">
+              <span className="text-[9px] font-bold tracking-wider text-brand-gold uppercase">Editorial Overview</span>
             </div>
-            <h2 className="text-2xl font-light text-neutral-950 tracking-tight leading-tight">
+            <h2 className="text-2xl font-light text-brand-dark tracking-tight leading-tight font-serif">
               {projectData.title}
             </h2>
           </div>
 
           <div className="text-neutral-600 space-y-3.5 text-xs sm:text-sm font-light text-justify leading-relaxed">
             <p>
-              <strong className="font-medium text-neutral-900">ACE Sector 150 Noida</strong> is an upcoming ultra-luxury residential development that redefines modern living with elegant architecture, spacious layouts, and premium specifications.
+              <strong className="font-medium text-brand-dark">ACE Sector 150 Noida</strong> is an upcoming ultra-luxury residential development that redefines modern living with elegant architecture, spacious layouts, and premium specifications.
             </p>
             <p>
               Located strategically within the prime growth zone of Sector 150, it blends natural green vistas with seamless corridor connectivity directly linked to the National Capital Region infrastructure.
@@ -130,7 +130,7 @@ export default function Overview() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full bg-neutral-950 text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-md active:scale-99 border-none cursor-pointer"
+            className="w-full bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-md active:scale-99 border-none cursor-pointer transition-colors"
           >
             Download Brochure
           </button>
@@ -174,23 +174,23 @@ export default function Overview() {
 
       {/* ================= POPUP LEAD INQUIRY FORM MODAL ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-neutral-950/50 backdrop-blur-xs select-none">
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-brand-dark/50 backdrop-blur-xs select-none">
           <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
           
-          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none">
+          <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none animate-scale-up">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <h3 className="text-lg font-medium text-neutral-900 tracking-tight text-center mb-5">
+            <h3 className="text-lg font-medium text-brand-dark tracking-tight text-center mb-5 font-serif">
               Enter Your Details
             </h3>
 
             <form onSubmit={handleModalSubmit} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Full Name</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Full Name</label>
                 <input
                   type="text"
                   name="name"
@@ -198,12 +198,12 @@ export default function Overview() {
                   placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Mobile Number</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Mobile Number</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
                   <input
@@ -214,13 +214,13 @@ export default function Overview() {
                     placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 mb-1">Email Address</label>
+                <label className="block text-[11px] font-medium text-neutral-500 mb-1">Email Address</label>
                 <input
                   type="email"
                   name="email"
@@ -228,14 +228,14 @@ export default function Overview() {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-[#991b1b] focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative mt-2 bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
+                className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>
