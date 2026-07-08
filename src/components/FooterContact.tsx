@@ -18,12 +18,28 @@ export default function FooterContact() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // Completely synchronized target endpoint redirection sequence
-      router.push("/thank-you");
+      // Connect to the active backend lead transmission API pipeline routing framework
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Redirect completely over to the target workspace endpoints upon verified mail delivery confirmation
+        router.push("/thank-you");
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Server processing exception returned:", errorData);
+        } else {
+          console.error("Server returned non-JSON fallback raw formats:", await response.text());
+        }
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -38,7 +54,6 @@ export default function FooterContact() {
         
         {/* ================= EDITORIAL SECTION HEADERS ================= */}
         <div className="text-center mb-10 lg:mb-14 space-y-3">
-          {/* Swapped crimson red badge over to elegant brand gold tokens */}
           <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-none">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
             <span className="text-[10px] font-bold tracking-[0.2em] text-brand-gold uppercase">Get In Touch</span>
@@ -117,7 +132,6 @@ export default function FooterContact() {
                   />
                 </div>
 
-                {/* Main button accent upgraded from crimson red over to luxury gold */}
                 <button
                   type="submit"
                   disabled={isSubmitting}

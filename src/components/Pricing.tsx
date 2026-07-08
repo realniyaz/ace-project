@@ -25,13 +25,32 @@ export default function Pricing() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsModalOpen(false);
-      
-      // Completely synchronized target endpoint redirection sequence
-      router.push("/thank-you");
+      // Direct pipeline dispatch with accurate metadata attachment payload formats
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          configSelection: selectedConfig // Enriches lead notification with selected card variant
+        }),
+      });
+
+      if (response.ok) {
+        setIsModalOpen(false);
+        // Clear routing transition upon guaranteed backend pipeline fulfillment confirmation
+        router.push("/thank-you");
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Server lead rejection details:", errorData);
+        } else {
+          console.error("Server returned non-JSON fallback raw formats:", await response.text());
+        }
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -46,7 +65,6 @@ export default function Pricing() {
         
         {/* ================= EDITORIAL SECTION HEADERS ================= */}
         <div className="text-center space-y-3">
-          {/* Swapped crimson tag decoration over to luxury gold tokens */}
           <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-none">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
             <span className="text-[10px] font-bold tracking-[0.2em] text-brand-gold uppercase">Investment Matrix</span>
@@ -74,7 +92,6 @@ export default function Pricing() {
                 key={item.name}
                 className="group relative px-6 py-6 md:px-8 md:py-7 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-4 items-center bg-white transition-all duration-500 ease-out hover:bg-neutral-50/60"
               >
-                {/* Asymmetric left edge brand line indicator tracking element updated to gold */}
                 <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-brand-gold scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center" />
 
                 {/* COLUMN 1: CONFIG TYPOLOGY */}
@@ -83,12 +100,10 @@ export default function Pricing() {
                     {item.name}
                   </span>
                   
-                  {/* Blueprint geometry icon metadata trace */}
                   <svg className="w-4 h-4 text-neutral-300 group-hover:text-brand-gold md:block hidden transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                   
-                  {/* Mobile Only: Starting price badge positioning alignment */}
                   <span className="md:hidden px-2.5 py-1 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-[10px] font-bold rounded-sm">
                     {item.price}
                   </span>
@@ -105,7 +120,7 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* COLUMN 3: VALUATION VALUES (Desktop Dedicated Panel) */}
+                {/* COLUMN 3: VALUATION VALUES */}
                 <div className="col-span-1 md:col-span-3 hidden md:block">
                   <div className="text-sm xl:text-base font-medium text-brand-dark group-hover:text-brand-gold transition-colors duration-300">
                     {item.price}
@@ -152,7 +167,7 @@ export default function Pricing() {
             </button>
 
             <h3 className="text-lg font-medium text-brand-dark tracking-tight text-center mb-5 font-serif">
-              Enter Your Details
+              Enquire: {selectedConfig}
             </h3>
 
             <form onSubmit={handlePricingSubmit} className="space-y-4">
@@ -199,12 +214,12 @@ export default function Pricing() {
                 />
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting ? "Transmitting..." : "Submit"}
               </button>
             </form>
           </div>

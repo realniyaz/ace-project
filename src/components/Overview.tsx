@@ -28,13 +28,24 @@ export default function Overview() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsModalOpen(false);
-      
-      // Completely synchronized target endpoint redirection sequence
-      router.push("/thank-you");
+      // Direct pipeline dispatch to your active backend route handler
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsModalOpen(false);
+        // Clear redirection sequence upon verified mail pipeline delivery
+        router.push("/thank-you");
+      } else {
+        const errorData = await response.json();
+        console.error("Server processing exception returned:", errorData);
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -191,7 +202,7 @@ export default function Overview() {
             <form onSubmit={handleModalSubmit} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-medium text-neutral-500 mb-1">Full Name</label>
-                <input
+                <input suppressHydrationWarning
                   type="text"
                   name="name"
                   required
@@ -206,7 +217,7 @@ export default function Overview() {
                 <label className="block text-[11px] font-medium text-neutral-500 mb-1">Mobile Number</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400 font-medium border-r border-neutral-200 pr-2">+91</span>
-                  <input
+                  <input suppressHydrationWarning
                     type="tel"
                     name="mobile"
                     required
@@ -221,7 +232,7 @@ export default function Overview() {
 
               <div>
                 <label className="block text-[11px] font-medium text-neutral-500 mb-1">Email Address</label>
-                <input
+                <input suppressHydrationWarning
                   type="email"
                   name="email"
                   required
@@ -232,12 +243,12 @@ export default function Overview() {
                 />
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting ? "Transmitting..." : "Submit"}
               </button>
             </form>
           </div>

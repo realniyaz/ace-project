@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { projectData } from "@/config/projectData";
 
 export default function FloatingActions() {
+  const router = useRouter();
   const [isEnquireOpen, setIsEnquireOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", mobile: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,11 +19,33 @@ export default function FloatingActions() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setIsEnquireOpen(false);
-      window.location.href = "/thank-you";
+      // Connect to the active backend lead transmission API pipeline routing framework
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          configSelection: "Floating Action Sticky Bar Enquiry" // Contextual identifier added to database payload
+        }),
+      });
+
+      if (response.ok) {
+        setIsEnquireOpen(false);
+        sessionStorage.setItem("welcome_modal_triggered", "true");
+        // Clear routing transition upon guaranteed backend pipeline fulfillment confirmation
+        router.push("/thank-you");
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Server lead rejection details:", errorData);
+        } else {
+          console.error("Server returned non-JSON fallback raw formats:", await response.text());
+        }
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -49,7 +73,7 @@ export default function FloatingActions() {
           </span>
         </a>
 
-        {/* ACTION 2: CRM POPUP TRIGGER (Shifted to Premium Brand Gold) */}
+        {/* ACTION 2: CRM POPUP TRIGGER */}
         <button suppressHydrationWarning
           onClick={() => setIsEnquireOpen(true)}
           className="flex-1 lg:flex-none flex items-center justify-center bg-brand-gold text-white lg:w-14 lg:h-14 lg:bg-white lg:text-brand-gold lg:border lg:border-neutral-200/80 lg:rounded-full lg:shadow-xl hover:lg:bg-neutral-50 transition-all duration-300 group cursor-pointer border-none"
@@ -93,7 +117,7 @@ export default function FloatingActions() {
           <div className="relative bg-white border border-neutral-200/80 w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl z-10 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto scrollbar-none animate-scale-up">
             <button
               onClick={() => setIsEnquireOpen(false)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1.5 transition-colors cursor-pointer rounded-full"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 p-1.5 transition-colors cursor-pointer rounded-full border-none bg-transparent"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -101,7 +125,6 @@ export default function FloatingActions() {
             </button>
 
             <div className="text-center mb-5 space-y-2">
-              {/* Premium Gold ribbon identifier */}
               <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
                 <span className="text-[9px] font-bold tracking-[0.2em] text-brand-gold uppercase">Immediate Callback</span>
@@ -115,14 +138,14 @@ export default function FloatingActions() {
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-600 mb-1">Full Name</label>
-                <input
+                <input suppressHydrationWarning
                   type="text"
                   name="name"
                   required
                   placeholder="Your name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
@@ -130,7 +153,7 @@ export default function FloatingActions() {
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-600 mb-1">Mobile Contact</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-neutral-500 font-medium border-r border-neutral-200 pr-2.5">🇮🇳 +91</span>
-                  <input
+                  <input suppressHydrationWarning
                     type="tel"
                     name="mobile"
                     required
@@ -138,21 +161,21 @@ export default function FloatingActions() {
                     placeholder="10-digit number"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-16 pr-4 py-3.5 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-16 pr-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-600 mb-1">Email Address</label>
-                <input
+                <input suppressHydrationWarning
                   type="email"
                   name="email"
                   required
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3.5 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                 />
               </div>
 
@@ -168,8 +191,7 @@ export default function FloatingActions() {
                 </span>
               </label>
 
-              {/* Master Class Button Component with custom Gold transitions */}
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full relative mt-1 bg-brand-gold text-white font-bold text-xs uppercase tracking-[0.15em] py-4 rounded-xl shadow-lg overflow-hidden disabled:opacity-70 group/btn cursor-pointer active:scale-[0.99] border-none"

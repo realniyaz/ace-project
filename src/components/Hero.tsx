@@ -33,13 +33,23 @@ export default function Hero() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Direct, optimized synchronization simulation step
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      
-      // Target viewport workspace redirection routing path
-      router.push("/thank-you");
+      // Connect to the active backend lead transmission API pipeline routing framework
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Redirect completely over to the target workspace endpoints upon verified mail delivery confirmation
+        router.push("/thank-you");
+      } else {
+        const errorData = await response.json();
+        console.error("Server processing exception returned:", errorData);
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -137,7 +147,7 @@ export default function Hero() {
                     placeholder="Name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                   />
                 </div>
 
@@ -153,7 +163,7 @@ export default function Hero() {
                       placeholder="10-digit number"
                       value={formData.mobile}
                       onChange={handleInputChange}
-                      className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                      className="w-full bg-neutral-50 border border-neutral-200 rounded-xl pl-14 pr-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                     />
                   </div>
                 </div>
@@ -167,17 +177,17 @@ export default function Hero() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-neutral-900 focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
+                    className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 text-xs text-brand-dark focus:outline-none focus:border-brand-gold focus:bg-white transition-all"
                   />
                 </div>
 
-                {/* Main Action Trigger shifted from crimson red over to polished brand gold */}
+                {/* Secure Gold layout confirmation button processing state tracking logic */}
                 <button suppressHydrationWarning
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? "Transmitting..." : "Submit"}
                 </button>
               </form>
             </div>

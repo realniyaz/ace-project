@@ -29,13 +29,33 @@ export default function FloorPlans() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsModalOpen(false);
-      
-      // Completely synchronized target endpoint redirection sequence
-      router.push("/thank-you");
+      // Connect to the active backend lead transmission API pipeline routing framework
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          configSelection: `${currentConfig?.name} Floor Plan Inquire` // Contextual blueprint variant attached
+        }),
+      });
+
+      if (response.ok) {
+        setIsModalOpen(false);
+        sessionStorage.setItem("welcome_modal_triggered", "true");
+        // Clear redirection sequence upon verified mail pipeline delivery
+        router.push("/thank-you");
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Server lead rejection details:", errorData);
+        } else {
+          console.error("Server returned non-JSON fallback raw formats:", await response.text());
+        }
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -50,7 +70,6 @@ export default function FloorPlans() {
         
         {/* ================= EDITORIAL SECTION HEADERS ================= */}
         <div className="text-center space-y-3">
-          {/* Swapped crimson tag decoration over to luxury gold tokens */}
           <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-none">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
             <span className="text-[10px] font-bold tracking-[0.2em] text-brand-gold uppercase">Architectural Blueprints</span>
@@ -140,7 +159,7 @@ export default function FloorPlans() {
             </div>
 
             {/* Premium Gold Action Trigger configuration */}
-            <button
+            <button suppressHydrationWarning
               onClick={() => setIsModalOpen(true)}
               className="w-full max-w-sm mx-auto lg:mx-0 relative bg-brand-dark text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl overflow-hidden group/btn cursor-pointer shadow-md transition-all duration-500 border-none"
             >
@@ -164,7 +183,7 @@ export default function FloorPlans() {
           <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
           
           <div className="relative bg-white border border-neutral-200 w-full max-w-sm rounded-2xl p-6 shadow-xl z-10 max-h-[90vh] overflow-y-auto scrollbar-none animate-scale-up">
-            <button 
+            <button suppressHydrationWarning
               onClick={() => setIsModalOpen(false)} 
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full cursor-pointer transition-colors border-none"
               aria-label="Close"
@@ -175,7 +194,7 @@ export default function FloorPlans() {
             </button>
 
             <h3 className="text-lg font-medium text-brand-dark tracking-tight text-center mb-5 font-serif">
-              Enter Your Details
+              Enquire: {currentConfig?.name}
             </h3>
 
             <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -227,7 +246,7 @@ export default function FloorPlans() {
                 disabled={isSubmitting}
                 className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting ? "Transmitting..." : "Submit"}
               </button>
             </form>
           </div>

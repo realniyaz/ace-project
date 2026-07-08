@@ -33,12 +33,33 @@ export default function WelcomeModal() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      setIsOpen(false);
-      sessionStorage.setItem("welcome_modal_triggered", "true");
-      router.push("/thank-you");
+      // Connect to the active backend lead transmission API pipeline routing framework
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          configSelection: "Welcome Modal Auto-Popup Popup Enquiry"
+        }),
+      });
+
+      if (response.ok) {
+        setIsOpen(false);
+        sessionStorage.setItem("welcome_modal_triggered", "true");
+        // Clear routing transition upon guaranteed backend pipeline fulfillment confirmation
+        router.push("/thank-you");
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Server lead rejection details:", errorData);
+        } else {
+          console.error("Server returned non-JSON fallback raw formats:", await response.text());
+        }
+        setIsSubmitting(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Network transport layer connection exception:", error);
       setIsSubmitting(false);
     }
   };
@@ -55,7 +76,7 @@ export default function WelcomeModal() {
         {/* Minimalist Dismissal Cross */}
         <button 
           onClick={handleClose} 
-          className="absolute top-4 right-4 text-neutral-400 hover:text-brand-dark p-1.5 cursor-pointer transition-colors rounded-full border-none"
+          className="absolute top-4 right-4 text-neutral-400 hover:text-brand-dark p-1.5 cursor-pointer transition-colors rounded-full border-none bg-transparent"
           aria-label="Close"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -123,7 +144,7 @@ export default function WelcomeModal() {
             disabled={isSubmitting}
             className="w-full relative mt-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs uppercase tracking-[0.15em] py-3.5 rounded-xl shadow-md transition-all duration-300 overflow-hidden active:scale-[0.99] disabled:opacity-70 cursor-pointer border-none"
           >
-            {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+            {isSubmitting ? "Transmitting..." : "Submit Enquiry"}
           </button>
         </form>
       </div>
