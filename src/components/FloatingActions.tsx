@@ -27,7 +27,7 @@ export default function FloatingActions() {
   };
 
   const whatsappMessage = encodeURIComponent(`Hi, I am interested in ${projectData.title}. Please share the digital brochure, inventory details, and floor plans.`);
-  const whatsappUrl = `https://wa.me/${projectData.contact.phone.replace(/[^0-9]/g, "")}?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${projectData.contact.mobile.replace(/[^0-9]/g, "")}?text=${whatsappMessage}`;
 
   return (
     <>

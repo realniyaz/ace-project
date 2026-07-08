@@ -8,6 +8,7 @@ export interface PropertyConfig {
 export interface ContactDetails {
   address: string;
   phone: string;
+  mobile: string;
   email: string;
 }
 
@@ -28,7 +29,7 @@ export interface ProjectDetails {
 }
 
 export const projectData: ProjectDetails = {
-  title: "ACE 150 NEW LAUNCH",
+  title: "ACE PARKWAY 2.0",
   location: "Sector 150, Noida",
   status: "Pre-Launch",
   landParcel: "15 Acres",
@@ -47,6 +48,7 @@ export const projectData: ProjectDetails = {
   contact: {
     address: "Sector 150, Noida, ACE 150",
     phone: "+91 9910374156",
+    mobile : "+91 70420 80055",
     email: "realtyfmleads@gmail.com"
   }, // Fixed: Now uses valid object notation matching the type template
 };

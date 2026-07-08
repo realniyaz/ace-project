@@ -9,7 +9,7 @@ import { projectData } from "@/config/projectData";
 export default function ThankYouPage() {
   // Safe WhatsApp Link Format Logic
   const whatsappMessage = encodeURIComponent(`Hi, I just submitted my details on the portal for ${projectData.title}. Please connect and share the pricing details and brochure here.`);
-  const whatsappUrl = `https://wa.me/${projectData.contact.phone.replace(/[^0-9]/g, "")}?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${projectData.contact.mobile.replace(/[^0-9]/g, "")}?text=${whatsappMessage}`;
 
   return (
     <>
@@ -65,7 +65,7 @@ export default function ThankYouPage() {
               href="/" 
               className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
             >
-              &larr; Back to Landing Page
+              &larr; Back to Home Page
             </Link>
           </div>
 
