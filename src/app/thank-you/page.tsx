@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
@@ -13,10 +15,21 @@ export default function ThankYouPage() {
 
   return (
     <>
+      {/* ================= GOOGLE ADS LEAD FORM CONVERSION EVENT SNIPPET ================= */}
+      <Script id="google-ads-conversion" strategy="afterInteractive">
+        {`
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion', {
+              'send_to': 'AW-18243414829/S1AyCPOR0sAcEK3WkftD'
+            });
+          }
+        `}
+      </Script>
+
       {/* Global Navigation Header */}
       <Navbar />
 
-      <main className="relative min-h-dvh bg-[#FAF9F5] flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-[#991b1b]/10 selection:text-[#991b1b] antialiased">
+      <main className="relative min-h-dvh bg-brand-cream flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-brand-gold/20 selection:text-neutral-900 antialiased">
         {/* Subtle Decorative Background Layer */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
@@ -32,7 +45,7 @@ export default function ThankYouPage() {
 
           {/* Understandable Message */}
           <div className="space-y-2">
-            <h1 className="text-xl sm:text-2xl font-medium text-neutral-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-medium text-brand-dark tracking-tight font-serif">
               Thank You!
             </h1>
             <p className="text-xs sm:text-sm text-neutral-500 font-light leading-relaxed">
@@ -63,7 +76,7 @@ export default function ThankYouPage() {
           <div className="pt-2 border-t border-neutral-100">
             <Link 
               href="/" 
-              className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+              className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-dark transition-colors cursor-pointer"
             >
               &larr; Back to Home Page
             </Link>
